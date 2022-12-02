@@ -17,8 +17,8 @@ int main(int argc, const char **argv)
   try {
     CLI::App app{ fmt::format("{} version {}", aoc_2022_cpp::cmake::project_name, aoc_2022_cpp::cmake::project_version) };
 
-    std::optional<std::string> message;
-    app.add_option("-m,--message", message, "A message to print back out");
+    auto level = 1;
+    app.add_option("-l,--level", level, "Run specific level (1..1). Default is last level");
     bool show_version = false;
     app.add_flag("--version", show_version, "Show version information");
 
@@ -32,11 +32,7 @@ int main(int argc, const char **argv)
     // Use the default logger (stdout, multi-threaded, colored)
     spdlog::info("Hello, {}!", "World");
 
-    if (message) {
-      fmt::print("Message: '{}'\n", *message);
-    } else {
-      fmt::print("No Message Provided :(\n");
-    }
+    spdlog::info("Level selected: '{}'", level);
   } catch (const std::exception &e) {
     spdlog::error("Unhandled exception in main: {}", e.what());
   }
