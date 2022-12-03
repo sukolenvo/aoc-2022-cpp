@@ -3,7 +3,7 @@ find_package(spdlog CONFIG REQUIRED)
 find_package(CLI11 CONFIG REQUIRED)
 
 # Generic test that uses conan libs
-add_executable(aoc main.cpp)
+add_executable(aoc main.cpp level1.cpp level1.hpp)
 target_link_libraries(
   aoc
   PUBLIC project_options project_warnings
