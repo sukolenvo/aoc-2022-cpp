@@ -103,22 +103,23 @@ dynamic_project_options(
   PCH_HEADERS
   <vector>
   <string> # This is a list of headers to pre-compile, here are some common ones
-  ENABLE_CONAN
+#  fmt/core.h
+#  ENABLE_CONAN
   # CONAN_OPTIONS    # Extra options to pass to conan
   # MSVC_WARNINGS    # Override the defaults for the MSVC warnings
   # CLANG_WARNINGS   # Override the defaults for the CLANG warnings
   # GCC_WARNINGS     # Override the defaults for the GCC warnings
-  CPPCHECK_OPTIONS
-  --enable=style,performance,warning,portability
-  --inline-suppr
-  # We cannot act on a bug/missing feature of cppcheck
-  --suppress=cppcheckError
-  --suppress=internalAstError
-  # if a file does not have an internalAstError, we get an unmatchedSuppression error
-  --suppress=unmatchedSuppression
-  --suppress=passedByValue
-  --suppress=syntaxError
-  --inconclusive
+#  CPPCHECK_OPTIONS
+#  --enable=style,performance,warning,portability
+#  --inline-suppr
+#  # We cannot act on a bug/missing feature of cppcheck
+#  --suppress=cppcheckError
+#  --suppress=internalAstError
+#  # if a file does not have an internalAstError, we get an unmatchedSuppression error
+#  --suppress=unmatchedSuppression
+#  --suppress=passedByValue
+#  --suppress=syntaxError
+#  --inconclusive
 )
 
 target_compile_features(project_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})

@@ -1,12 +1,10 @@
-find_package(fmt CONFIG REQUIRED)
-find_package(spdlog CONFIG REQUIRED)
-find_package(CLI11 CONFIG REQUIRED)
-
 # Generic test that uses conan libs
-add_executable(aoc main.cpp level1.cpp level1.hpp)
+add_library(solutions OBJECT level1.hpp)
+target_link_libraries(solutions PRIVATE project_options project_warnings)
+add_executable(aoc main.cpp)
 target_link_libraries(
   aoc
   PUBLIC project_options project_warnings
-  PRIVATE CLI11::CLI11 fmt::fmt spdlog::spdlog)
+  PRIVATE solutions)
 
 target_include_directories(aoc PRIVATE "${CMAKE_BINARY_DIR}/configured_files/include")
