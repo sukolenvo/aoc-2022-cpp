@@ -104,7 +104,7 @@ dynamic_project_options(
   <vector>
   <string> # This is a list of headers to pre-compile, here are some common ones
 #  fmt/core.h
-#  ENABLE_CONAN
+  ENABLE_CONAN
   # CONAN_OPTIONS    # Extra options to pass to conan
   # MSVC_WARNINGS    # Override the defaults for the MSVC warnings
   # CLANG_WARNINGS   # Override the defaults for the CLANG warnings
