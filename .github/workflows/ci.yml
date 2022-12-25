@@ -137,6 +137,11 @@ jobs:
           gcovr: true
           opencppcoverage: true
 
+      - name: Fix CPATH
+        if: ${{ contains(matrix.compiler, 'gcc') }}
+        run: |
+          echo "CPATH=" > $GITHUB_ENV
+
       - name: Cleanup Conan system packages (they are not properly cached)
         run: |
           conan remove -f '*/system'
