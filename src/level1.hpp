@@ -64,7 +64,7 @@ int solve(const std::string_view &input) {
     int value{};
     auto result = std::from_chars(line.data(), line.data() + line.size(), value);
     if (result.ec != std::errc{}) {
-      throw std::invalid_argument(line.begin());
+      throw std::invalid_argument(line.data());
     }
     current += value;
   }
