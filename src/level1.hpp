@@ -13,6 +13,7 @@
 #include "vector"
 #include "iostream"
 #include "numeric"
+#include "array"
 
 std::vector<std::string_view> splitLines(const std::string_view &input)
 {
