@@ -7,13 +7,13 @@
 
 #endif// AOC_2022_CPP_LEVEL1_HPP
 
-#include "charconv"
-#include "ranges"
-#include "string_view"
-#include "vector"
-#include "iostream"
-#include "numeric"
-#include "array"
+#include <charconv>
+#include <ranges>
+#include <string_view>
+#include <vector>
+#include <iostream>
+#include <numeric>
+#include <array>
 
 std::vector<std::string_view> splitLines(const std::string_view &input)
 {
@@ -62,7 +62,7 @@ int solve(const std::string_view &input) {
       continue;
     }
     int value{};
-    auto result = std::from_chars(line.begin(), line.end(), value);
+    auto result = std::from_chars(line.data(), line.data() + line.size(), value);
     if (result.ec != std::errc{}) {
       throw std::invalid_argument(line.begin());
     }
