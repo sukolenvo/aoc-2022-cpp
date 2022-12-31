@@ -4,14 +4,16 @@
 #include <string>
 
 #include "level1.hpp"
+#include "level2.hpp"
 
 int main(int argc, const char **argv) // NOLINT(bugprone-exception-escape) check is unreliable on Windows, see: https://stackoverflow.com/questions/61014184/clang-tidys-bugprone-exception-escape-behaves-weirdly-with-msvc-stl
 {
   try {
     const std::array levels{
-      std::function(&level1),
+      std::function(&level1::run),
+      std::function(&level2::run),
     };
-    size_t level = 1;
+    size_t level = levels.size();
     if (argc == 2) {
       auto args = std::span(argv, size_t(argc));
       level = size_t(std::stoi(args[1]));

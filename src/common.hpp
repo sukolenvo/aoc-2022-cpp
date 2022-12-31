@@ -8,7 +8,7 @@
 #include <string_view>
 #include <vector>
 
-std::vector<std::string_view> splitLines(const std::string_view &input)
+inline std::vector<std::string_view> splitLines(const std::string_view &input)
 {
   std::vector<std::string_view> lines;
   auto start = 0;

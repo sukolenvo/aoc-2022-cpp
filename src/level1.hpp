@@ -15,17 +15,14 @@
 
 #include "common.hpp"
 
-void saveDwarf(auto &topDwarfs, int food) {
-  if (food < topDwarfs.at(topDwarfs.size() - 1)) {
-    return;
-  }
+namespace level1 {
+
+void saveDwarf(auto &topDwarfs, int food)
+{
+  if (food < topDwarfs.at(topDwarfs.size() - 1)) { return; }
   for (size_t i = 1; i < topDwarfs.size(); ++i) {
-    if (food > topDwarfs.at(topDwarfs.size() - 1 - i)) {
-      continue;
-    }
-    for (size_t j = 1; j < i; ++j) {
-      topDwarfs.at(topDwarfs.size() - j) = topDwarfs.at(topDwarfs.size() - j - 1);
-    }
+    if (food > topDwarfs.at(topDwarfs.size() - 1 - i)) { continue; }
+    for (size_t j = 1; j < i; ++j) { topDwarfs.at(topDwarfs.size() - j) = topDwarfs.at(topDwarfs.size() - j - 1); }
     topDwarfs.at(topDwarfs.size() - i) = food;
     return;
   }
@@ -35,8 +32,8 @@ void saveDwarf(auto &topDwarfs, int food) {
   topDwarfs[0] = food;
 }
 
-template<auto N>
-int solve(const std::string_view &input) {
+template<auto N> int solve(const std::string_view &input)
+{
   std::array<int, N> topDwarfs{};
   int current = 0;
   for (const auto &line : splitLines(input)) {
@@ -47,14 +44,10 @@ int solve(const std::string_view &input) {
     }
     int value{};
     auto result = std::from_chars(line.data(), line.data() + line.size(), value);
-    if (result.ec != std::errc{}) {
-      throw std::invalid_argument(line.data());
-    }
+    if (result.ec != std::errc{}) { throw std::invalid_argument(line.data()); }
     current += value;
   }
-  if (current > 0) {
-    saveDwarf(topDwarfs, current);
-  }
+  if (current > 0) { saveDwarf(topDwarfs, current); }
   return std::accumulate(topDwarfs.begin(), topDwarfs.end(), 0);
 }
 
@@ -2311,9 +2304,11 @@ const auto taskInput = R"(
 2775
 )";
 
-void level1() {
+void run()
+{
   std::cout << solve<1>(taskInput) << '\n';
   std::cout << solve<3>(taskInput) << '\n';
 }
 
+}
 #endif// AOC_2022_CPP_LEVEL1_HPP
