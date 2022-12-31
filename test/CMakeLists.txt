@@ -20,7 +20,6 @@ endif()
 find_package(Catch2 CONFIG REQUIRED)
 
 include(Catch)
-include_directories(../src)
 
 add_library(catch_main OBJECT catch_main.cpp)
 target_link_libraries(catch_main PUBLIC Catch2::Catch2)

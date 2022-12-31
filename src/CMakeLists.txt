@@ -1,6 +1,5 @@
-add_library(solutions common.hpp level1.hpp)
-target_link_libraries(solutions PRIVATE project_options project_warnings )
-set_target_properties(solutions PROPERTIES LINKER_LANGUAGE CXX)
+add_library(solutions INTERFACE)
+target_include_directories(solutions INTERFACE .)
 add_executable(aoc main.cpp)
 target_link_libraries(
   aoc
