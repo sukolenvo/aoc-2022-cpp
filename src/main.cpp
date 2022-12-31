@@ -24,7 +24,7 @@ int main(int argc, const char **argv)
 
     return EXIT_SUCCESS;
   } catch (const std::exception &e) {
-    std::cout << "Unhandled exception in main :" << e.what();
+    std::cerr << "Unhandled exception in main :" << e.what();
     return EXIT_FAILURE;
   }
 }
