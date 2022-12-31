@@ -5,7 +5,7 @@
 
 #include "level1.hpp"
 
-int main(int argc, const char **argv)
+int main(int argc, const char **argv) // NOLINT(bugprone-exception-escape) check is unreliable on Windows, see: https://stackoverflow.com/questions/61014184/clang-tidys-bugprone-exception-escape-behaves-weirdly-with-msvc-stl
 {
   try {
     const std::array levels{
@@ -24,8 +24,7 @@ int main(int argc, const char **argv)
 
     return EXIT_SUCCESS;
   } catch (const std::exception &e) {
-    std::cerr << "Unhandled exception in main :";
-    std::cerr << e.what();
+    std::cerr << "Unhandled exception in main :" << e.what();
     return EXIT_FAILURE;
   }
 }
