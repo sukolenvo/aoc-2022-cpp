@@ -1,7 +1,7 @@
 //
 // Created by object on 3/12/22.
 //
-#include "../src/level1.hpp"
+#include "level1.hpp"
 
 #include <catch2/catch.hpp>
 

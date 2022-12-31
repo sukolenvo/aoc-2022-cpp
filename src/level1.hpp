@@ -5,8 +5,6 @@
 #ifndef AOC_2022_CPP_LEVEL1_HPP
 #define AOC_2022_CPP_LEVEL1_HPP
 
-#endif// AOC_2022_CPP_LEVEL1_HPP
-
 #include <charconv>
 #include <ranges>
 #include <string_view>
@@ -15,21 +13,7 @@
 #include <numeric>
 #include <array>
 
-std::vector<std::string_view> splitLines(const std::string_view &input)
-{
-  std::vector<std::string_view> lines;
-  auto start = 0;
-  auto index = 1;
-  for (const auto &item : input) {
-    if (item == '\n') {
-      lines.emplace_back(input.begin() + start, input.begin() + index - 1);
-      start = index;
-    }
-    ++index;
-  }
-  if (start != index - 1) { lines.emplace_back(input.begin() + start, input.begin() + index - 1); }
-  return lines;
-}
+#include "common.hpp"
 
 void saveDwarf(auto &topDwarfs, int food) {
   if (food < topDwarfs.at(topDwarfs.size() - 1)) {
@@ -2331,3 +2315,5 @@ void level1() {
   std::cout << solve<1>(taskInput) << '\n';
   std::cout << solve<3>(taskInput) << '\n';
 }
+
+#endif// AOC_2022_CPP_LEVEL1_HPP

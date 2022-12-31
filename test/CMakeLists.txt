@@ -20,13 +20,14 @@ endif()
 find_package(Catch2 CONFIG REQUIRED)
 
 include(Catch)
+include_directories(../src)
 
 add_library(catch_main OBJECT catch_main.cpp)
 target_link_libraries(catch_main PUBLIC Catch2::Catch2)
 target_link_libraries(catch_main PRIVATE aoc_2022_cpp::project_options)
 
 add_executable(tests tests.cpp level1_tests.cpp)
-target_link_libraries(tests PRIVATE aoc_2022_cpp::project_warnings aoc_2022_cpp::project_options catch_main)
+target_link_libraries(tests PRIVATE aoc_2022_cpp::project_warnings aoc_2022_cpp::project_options catch_main solutions)
 
 # automatically discover tests that are defined in catch based test files you can modify the unittests. Set TEST_PREFIX
 # to whatever you want, or use different for different binaries

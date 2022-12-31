@@ -10,7 +10,7 @@ LGTM Has to be set up manually after template is created:
 
 ## About aoc-2022-cpp
 
-
+Practice C++ with https://adventofcode.com/
 
 ## More Details
 
