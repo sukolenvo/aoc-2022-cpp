@@ -15,9 +15,7 @@ inline std::vector<std::string_view> splitLines(const std::string_view &input)
   auto index = 1;
   for (const auto &item : input) {
     if (item == '\n') {
-      if (start != index - 1) {
-        lines.emplace_back(input.begin() + start, input.begin() + index - 1);
-      }
+      lines.emplace_back(input.begin() + start, input.begin() + index - 1);
       start = index;
     }
     ++index;

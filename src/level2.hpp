@@ -52,8 +52,7 @@ int solve(const std::string_view &input, const auto &points_calculator) {
   return totalScore;
 }
 
-const auto taskInput = R"(
-B Y
+const auto taskInput = R"(B Y
 A X
 B Y
 A Y
@@ -2552,8 +2551,7 @@ C X
 B X
 C X
 A X
-B Z
-)";
+B Z)";
 
 void run() {
     std::cout << solve(taskInput, &calculatePointsPart1) << '\n';

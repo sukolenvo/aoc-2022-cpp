@@ -5,8 +5,7 @@
 
 #include "level1.hpp"
 
-const auto sample_input = R"(
-1000
+const auto sample_input = R"(1000
 2000
 3000
 
@@ -19,8 +18,7 @@ const auto sample_input = R"(
 8000
 9000
 
-10000
-)";
+10000)";
 
 TEST_CASE("solve1", "[level1]")
 {

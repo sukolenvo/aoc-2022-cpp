@@ -5,14 +5,12 @@
 
 #include "level3.hpp"
 
-const auto sample_input = R"(
-vJrwpWtwJgWrhcsFMMfFFhFp
+const auto sample_input = R"(vJrwpWtwJgWrhcsFMMfFFhFp
 jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
 PmmdzqPrVvPwwTWBwg
 wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
-CrZsJsPPZsGzwwsLwLmpwMDw
-)";
+CrZsJsPPZsGzwwsLwLmpwMDw)";
 
 TEST_CASE("solve3", "[level3]")
 {

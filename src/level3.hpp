@@ -94,8 +94,7 @@ int part2(const std::string_view& input)
   return totalPriority;
 }
 
-const auto taskInput = R"(
-fzmmmfwDWFzlQQqjCQjDGnqq
+const auto taskInput = R"(fzmmmfwDWFzlQQqjCQjDGnqq
 tJHJvLJVVttNsvTtTvgHHSVwCsQRQQZCZZMqQMQBnqBMQs
 LgThNJhNSgTJVgvgtghPhbpfWzfbwfPmpprb
 lDLnSnLZRjmWrlhrFF
@@ -394,14 +393,13 @@ HqSJchHTHbTgHhGhvmRzFmnFtzRF
 RJqHTpgDLJDSqLJJPNVjsfPwBVsVLlfN
 NDrBlSmrFBlbbJllmtHHwhNNhZztqHVRzQ
 CMTCGLcvvtfCdCcCvCnMTMcTzjHwVZVRLjRRjQjRHRwzwjVH
-dfGdgGMGPggnvfvgbtDtlSJPDSFJPslJ
-)";
+dfGdgGMGPggnvfvgbtDtlSJPDSFJPslJ)";
 
 void run()
 {
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }
-};
+}
 
 #endif// AOC_2022_CPP_LEVEL3_HPP

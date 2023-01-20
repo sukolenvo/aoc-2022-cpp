@@ -5,11 +5,9 @@
 
 #include "level2.hpp"
 
-const auto sample_input = R"(
-A Y
+const auto sample_input = R"(A Y
 B X
-C Z
-)";
+C Z)";
 
 TEST_CASE("solve2", "[level2]")
 {

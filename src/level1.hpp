@@ -2301,8 +2301,7 @@ const auto taskInput = R"(
 5785
 2912
 5664
-2775
-)";
+2775)";
 
 void run()
 {
