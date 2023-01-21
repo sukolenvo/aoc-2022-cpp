@@ -12,6 +12,7 @@
 #include <iostream>
 #include <numeric>
 #include <array>
+#include <stdexcept>
 
 #include "common.hpp"
 
