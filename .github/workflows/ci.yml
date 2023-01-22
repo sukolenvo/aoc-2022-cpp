@@ -170,7 +170,7 @@ jobs:
         if: runner.os == 'Windows'
         working-directory: ./build
         run: |
-          OpenCppCoverage.exe --sources src* --export_type cobertura:coverage.xml --cover_children -- ctest -C ${{matrix.build_type}}
+          OpenCppCoverage.exe --sources src* --modules tests.exe --export_type cobertura:coverage.xml --cover_children -- ctest -C ${{matrix.build_type}}
 
       - name: CPack
         if: matrix.package_generator != ''
@@ -184,7 +184,6 @@ jobs:
         with:
           files: |
             build/*-*${{ matrix.build_type }}*-*.*
-
 
       - name: Publish to codecov
         uses: codecov/codecov-action@v2
