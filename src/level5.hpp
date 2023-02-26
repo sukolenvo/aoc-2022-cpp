@@ -16,7 +16,8 @@
 namespace level5
 {
 
-struct TaskInput {
+struct Task
+{
   std::vector<std::vector<char>> stacks;
   std::vector<std::array<int, 3>> operations;
 };
@@ -30,12 +31,12 @@ auto parseInput(const auto &input)
   }
   const auto dividerIndex = static_cast<int>(std::distance(lines.begin(), iterator));
   const auto indexLine = lines.at(dividerIndex - 1);
-  TaskInput taskInput;
+  Task task;
   int expectedIndex = 1;
   for (int i = 0; i < indexLine.size(); ++i) {
     if (indexLine[i] != ' ') {
       if (expectedIndex + '0' == indexLine[i]) {
-        auto &stack = taskInput.stacks.emplace_back();
+        auto &stack = task.stacks.emplace_back();
         for (int j = dividerIndex - 2; j >= 0; --j) {
           auto &taskLevel = lines.at(j);
           if (taskLevel.size() > i && taskLevel[i] != ' ') {
@@ -60,45 +61,45 @@ auto parseInput(const auto &input)
   };
   for (auto it = lines.begin() + dividerIndex + 1; it != lines.end(); ++it) {
     auto line = it->begin();
-    taskInput.operations.push_back(std::array<int, 3>{
+    task.operations.push_back(std::array<int, 3>{
       readNumber(line = line + sizeof("move ") - 1),
       readNumber(line = line + sizeof(" from ") - 1),
       readNumber(line = line + sizeof(" to ") - 1)
     });
   }
-  return taskInput;
+  return task;
 }
 
 
 auto runCrane9000(const auto &input) {
-  auto taskInput = parseInput(input);
-  for (const auto &operation : taskInput.operations) {
+  auto task = parseInput(input);
+  for (const auto &operation : task.operations) {
     for (int i = 0; i < operation[0]; ++i) {
-      auto &fromStack = taskInput.stacks[operation[1] - 1];
-      auto &toStack = taskInput.stacks[operation[2] - 1];
+      auto &fromStack = task.stacks[operation[1] - 1];
+      auto &toStack = task.stacks[operation[2] - 1];
       toStack.push_back(fromStack.back());
       fromStack.pop_back();
     }
   }
   std::vector<char> result;
-  for (const auto &item : taskInput.stacks) {
-    result.push_back(item.back());
-  }
+  std::transform(task.stacks.begin(), task.stacks.end(), std::back_inserter(result), [](auto stack) {
+    return stack.back();
+  });
   return result;
 }
 
 auto runCrane9001(const auto &input) {
-  auto taskInput = parseInput(input);
-  for (const auto &operation : taskInput.operations) {
-    auto &fromStack = taskInput.stacks[operation[1] - 1];
-    auto &toStack = taskInput.stacks[operation[2] - 1];
+  auto task = parseInput(input);
+  for (const auto &operation : task.operations) {
+    auto &fromStack = task.stacks[operation[1] - 1];
+    auto &toStack = task.stacks[operation[2] - 1];
     std::copy(fromStack.end() - operation[0], fromStack.end(), std::back_inserter(toStack));
     fromStack.resize(fromStack.size() - operation[0]);
   }
   std::vector<char> result;
-  for (const auto &item : taskInput.stacks) {
-    result.push_back(item.back());
-  }
+  std::transform(task.stacks.begin(), task.stacks.end(), std::back_inserter(result), [](auto stack) {
+    return stack.back();
+  });
   return result;
 }
 
