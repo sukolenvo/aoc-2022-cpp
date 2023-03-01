@@ -19,7 +19,7 @@ namespace level5
 struct Task
 {
   std::vector<std::vector<char>> stacks;
-  std::vector<std::array<int, 3>> operations;
+  std::vector<std::array<unsigned int, 3>> operations;
 };
 
 auto parseInput(const auto &input)
@@ -29,16 +29,16 @@ auto parseInput(const auto &input)
   if (iterator == std::end(lines)) {
     throw std::invalid_argument("can't find divider line");
   }
-  const auto dividerIndex = static_cast<int>(std::distance(lines.begin(), iterator));
-  const auto indexLine = lines.at(dividerIndex - 1);
+  const auto dividerIndex = static_cast<size_t>(std::distance(lines.begin(), iterator));
+  const auto &indexLine = lines.at(dividerIndex - 1);
   Task task;
   int expectedIndex = 1;
-  for (int i = 0; i < indexLine.size(); ++i) {
+  for (size_t i = 0; i < indexLine.size(); ++i) {
     if (indexLine[i] != ' ') {
       if (expectedIndex + '0' == indexLine[i]) {
         auto &stack = task.stacks.emplace_back();
-        for (int j = dividerIndex - 2; j >= 0; --j) {
-          auto &taskLevel = lines.at(j);
+        for (size_t j = 0; j <= dividerIndex - 2; ++j) {
+          auto &taskLevel = lines.at(dividerIndex - 2 - j);
           if (taskLevel.size() > i && taskLevel[i] != ' ') {
             stack.push_back(taskLevel[i]);
           }
@@ -50,18 +50,18 @@ auto parseInput(const auto &input)
     }
   }
   const auto readNumber = [](auto &start) {
-    int result = 0;
+    unsigned int result = 0;
     char next = *start;
     while (next >= '0' && next <= '9') {
       result *= 10;
-      result += next - '0';
+      result += static_cast<unsigned int>(next - '0');
       next = *++start;
     }
     return result;
   };
-  for (auto it = lines.begin() + dividerIndex + 1; it != lines.end(); ++it) {
+  for (auto it = lines.begin() + static_cast<long>(dividerIndex) + 1; it != lines.end(); ++it) {
     auto line = it->begin();
-    task.operations.push_back(std::array<int, 3>{
+    task.operations.push_back(std::array<unsigned int, 3>{
       readNumber(line = line + sizeof("move ") - 1),
       readNumber(line = line + sizeof(" from ") - 1),
       readNumber(line = line + sizeof(" to ") - 1)
@@ -74,7 +74,7 @@ auto parseInput(const auto &input)
 auto runCrane9000(const auto &input) {
   auto task = parseInput(input);
   for (const auto &operation : task.operations) {
-    for (int i = 0; i < operation[0]; ++i) {
+    for (size_t i = 0; i < operation[0]; ++i) {
       auto &fromStack = task.stacks[operation[1] - 1];
       auto &toStack = task.stacks[operation[2] - 1];
       toStack.push_back(fromStack.back());
