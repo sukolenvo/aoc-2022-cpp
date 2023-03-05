@@ -22,6 +22,8 @@ class Directory {
   unsigned long fileSize = 0;
 
 public:
+  Directory(const Directory &copy) = delete;
+  Directory(Directory &&move) = default;
   explicit Directory(Directory *parentDir, const auto &dirName) : parent(parentDir) {
     if (parentDir == nullptr) {
       path = "/";
@@ -102,7 +104,7 @@ Directory *processCd(const std::string_view &location, Directory &root, Director
 {
   Directory *base = location.starts_with("/") ? &root : current;
   size_t start = 0;
-  auto end = location.find("/", start);
+  auto end = location.find('/', start);
   while (end != std::string::npos) {
     if (start == end) {
       ++start;
@@ -111,7 +113,7 @@ Directory *processCd(const std::string_view &location, Directory &root, Director
       base = base->getChild(childDir);
       start = end + 1;
     }
-    end = location.find("/", start);
+    end = location.find('/', start);
   }
   if (start != location.size()) { // no trailing slash. eg: cd Downloads
     base = base->getChild(location.substr(start));
@@ -152,13 +154,13 @@ auto part1(const auto &input) {
 auto part2(const auto &input) {
   auto root = parseInput(input);
   const auto minimumToDelete = root.getDirSize() - 40'000'000;
-  auto directoryToDelete = root;
+  const auto *directoryToDelete = &root;
   root.traverse([&](const Directory &dir) {
-    if (dir.getDirSize() >= minimumToDelete && dir.getDirSize() < directoryToDelete.getDirSize()) {
-      directoryToDelete = dir;
+    if (dir.getDirSize() >= minimumToDelete && dir.getDirSize() < directoryToDelete->getDirSize()) {
+      directoryToDelete = &dir;
     }
   });
-  return directoryToDelete.getDirSize();
+  return directoryToDelete->getDirSize();
 }
 
 static const auto taskInput = R"($ cd /

@@ -32,13 +32,13 @@ TEST_CASE("parseInput", "[level5]")
   REQUIRE(result.operations[3] == std::array<unsigned int, 3>{  1, 1, 2 });
 }
 
-TEST_CASE("runCrane9000", "[level5]")
+TEST_CASE("level5:runCrane9000", "[level5]")
 {
   const auto result = level5::runCrane9000(sample_input);
   REQUIRE(result == std::vector<char>{ 'C', 'M', 'Z' });
 }
 
-TEST_CASE("runCrane9001", "[level5]")
+TEST_CASE("level5:runCrane9001", "[level5]")
 {
   const auto result = level5::runCrane9001(sample_input);
   REQUIRE(result == std::vector<char>{ 'M', 'C', 'D' });

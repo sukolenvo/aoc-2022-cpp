@@ -29,7 +29,7 @@ $ ls
 5626152 d.ext
 7214296 k)";
 
-TEST_CASE("part1", "[level7]")
+TEST_CASE("level7:solve", "[level7]")
 {
   REQUIRE(level7::part1(sampleInput) == 95437);
   REQUIRE(level7::part2(sampleInput) == 24933642);

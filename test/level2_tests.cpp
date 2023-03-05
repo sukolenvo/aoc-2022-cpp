@@ -9,7 +9,7 @@ const auto sample_input = R"(A Y
 B X
 C Z)";
 
-TEST_CASE("solve2", "[level2]")
+TEST_CASE("level2:solve2", "[level2]")
 {
   REQUIRE(level2::solve(sample_input, &level2::calculatePointsPart1) == 15);
   REQUIRE(level2::solve(sample_input, &level2::calculatePointsPart2) == 12);

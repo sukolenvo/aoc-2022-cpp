@@ -12,7 +12,7 @@ const auto sample_input = R"(2-4,6-8
 6-6,4-6
 2-6,4-8)";
 
-TEST_CASE("solve4", "[level4]")
+TEST_CASE("lvel4:solve4", "[level4]")
 {
   REQUIRE(level4::part1(sample_input) == 2);
   REQUIRE(level4::part2(sample_input) == 4);

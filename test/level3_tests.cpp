@@ -12,7 +12,7 @@ wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw)";
 
-TEST_CASE("solve3", "[level3]")
+TEST_CASE("level3:solve3", "[level3]")
 {
   REQUIRE(level3::part1(sample_input) == 157);
   REQUIRE(level3::part2(sample_input) == 70);

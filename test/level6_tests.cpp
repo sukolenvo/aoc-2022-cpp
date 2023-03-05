@@ -5,7 +5,7 @@
 
 #include "level6.hpp"
 
-TEST_CASE("searchMarker", "[level6]")
+TEST_CASE("level6:searchMarker", "[level6]")
 {
   REQUIRE(level6::searchMarker("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 4) == 7);
   REQUIRE(level6::searchMarker("bvwbjplbgvbhsrlpgdmjqwftvncz", 4) == 5);

@@ -20,13 +20,13 @@ const auto sample_input = R"(1000
 
 10000)";
 
-TEST_CASE("solve1", "[level1]")
+TEST_CASE("level1:solve1", "[level1]")
 {
   REQUIRE(level1::solve<1>(sample_input) == 24000);
   REQUIRE(level1::solve<3>(sample_input) == 45000);
 }
 
-TEST_CASE("save1DwarfSecond", "[level1]")
+TEST_CASE("level1:save1DwarfSecond", "[level1]")
 {
   std::array<int, 3> dwarf = {3, 1, 0};
   level1::saveDwarf(dwarf, 2);
@@ -35,7 +35,7 @@ TEST_CASE("save1DwarfSecond", "[level1]")
   REQUIRE(dwarf.at(2) == 1);
 }
 
-TEST_CASE("save1DwarfTop", "[level1]")
+TEST_CASE("level1:save1DwarfTop", "[level1]")
 {
   std::array<int, 3> dwarf = {3, 0, 0};
   level1::saveDwarf(dwarf, 5); //NOLINT
@@ -44,7 +44,7 @@ TEST_CASE("save1DwarfTop", "[level1]")
   REQUIRE(dwarf.at(2) == 0);
 }
 
-TEST_CASE("save1DwarfLast", "[level1]")
+TEST_CASE("level1:save1DwarfLast", "[level1]")
 {
   std::array<int, 3> dwarf = {5, 3, 1};  //NOLINT
   level1::saveDwarf(dwarf, 2);
