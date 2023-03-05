@@ -82,7 +82,7 @@ auto runCrane9000(const auto &input) {
     }
   }
   std::vector<char> result;
-  std::transform(task.stacks.begin(), task.stacks.end(), std::back_inserter(result), [](auto stack) {
+  std::transform(task.stacks.cbegin(), task.stacks.cend(), std::back_inserter(result), [](const auto &stack) {
     return stack.back();
   });
   return result;
@@ -97,7 +97,7 @@ auto runCrane9001(const auto &input) {
     fromStack.resize(fromStack.size() - operation[0]);
   }
   std::vector<char> result;
-  std::transform(task.stacks.begin(), task.stacks.end(), std::back_inserter(result), [](auto stack) {
+  std::transform(task.stacks.cbegin(), task.stacks.cend(), std::back_inserter(result), [](const auto &stack) {
     return stack.back();
   });
   return result;
