@@ -49,7 +49,7 @@ auto parseInput(const auto &input)
       }
     }
   }
-  const auto readNumber = [](auto &start) {
+  const auto readDigits = [](auto &start) {
     unsigned int result = 0;
     char next = *start;
     while (next >= '0' && next <= '9') {
@@ -62,9 +62,9 @@ auto parseInput(const auto &input)
   for (auto it = lines.begin() + static_cast<long>(dividerIndex) + 1; it != lines.end(); ++it) {
     auto line = it->begin();
     task.operations.push_back(std::array<unsigned int, 3>{
-      readNumber(line = line + sizeof("move ") - 1),
-      readNumber(line = line + sizeof(" from ") - 1),
-      readNumber(line = line + sizeof(" to ") - 1)
+      readDigits(line = line + sizeof("move ") - 1),
+      readDigits(line = line + sizeof(" from ") - 1),
+      readDigits(line = line + sizeof(" to ") - 1)
     });
   }
   return task;
@@ -103,7 +103,7 @@ auto runCrane9001(const auto &input) {
   return result;
 }
 
-const auto taskInput = R"(    [H]         [H]         [V]
+static const auto taskInput = R"(    [H]         [H]         [V]
     [V]         [V] [J]     [F] [F]
     [S] [L]     [M] [B]     [L] [J]
     [C] [N] [B] [W] [D]     [D] [M]

@@ -52,7 +52,7 @@ template<auto N> int solve(const std::string_view &input)
   return std::accumulate(topDwarfs.begin(), topDwarfs.end(), 0);
 }
 
-const auto taskInput = R"(
+static const auto taskInput = R"(
 5800
 2273
 1315

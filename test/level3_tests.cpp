@@ -5,7 +5,7 @@
 
 #include "level3.hpp"
 
-const auto sample_input = R"(vJrwpWtwJgWrhcsFMMfFFhFp
+static const auto sample_input = R"(vJrwpWtwJgWrhcsFMMfFFhFp
 jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
 PmmdzqPrVvPwwTWBwg
 wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn

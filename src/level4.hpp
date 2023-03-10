@@ -68,7 +68,7 @@ auto part2(const std::string_view& input)
   return overlaps;
 }
 
-const auto taskInput = R"(8-82,3-96
+static const auto taskInput = R"(8-82,3-96
 13-95,99-99
 4-92,5-93
 16-80,16-80

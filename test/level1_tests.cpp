@@ -5,7 +5,7 @@
 
 #include "level1.hpp"
 
-const auto sample_input = R"(1000
+static const auto sample_input = R"(1000
 2000
 3000
 

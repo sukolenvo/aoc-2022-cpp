@@ -7,7 +7,7 @@
 
 #include "level5.hpp"
 
-const auto sample_input = R"(    [D]
+static const auto sample_input = R"(    [D]
 [N] [C]
 [Z] [M] [P]
  1   2   3

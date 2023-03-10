@@ -5,7 +5,7 @@
 
 #include "level2.hpp"
 
-const auto sample_input = R"(A Y
+static const auto sample_input = R"(A Y
 B X
 C Z)";
 

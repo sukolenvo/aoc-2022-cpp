@@ -94,7 +94,7 @@ int part2(const std::string_view& input)
   return totalPriority;
 }
 
-const auto taskInput = R"(fzmmmfwDWFzlQQqjCQjDGnqq
+static const auto taskInput = R"(fzmmmfwDWFzlQQqjCQjDGnqq
 tJHJvLJVVttNsvTtTvgHHSVwCsQRQQZCZZMqQMQBnqBMQs
 LgThNJhNSgTJVgvgtghPhbpfWzfbwfPmpprb
 lDLnSnLZRjmWrlhrFF

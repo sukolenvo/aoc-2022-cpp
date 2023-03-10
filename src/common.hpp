@@ -24,4 +24,18 @@ inline std::vector<std::string_view> splitLines(const std::string_view &input)
   return lines;
 }
 
+inline auto readNumber(auto start, auto end) {
+  auto value = 0;
+  auto negative = false;
+  if (*start == '-') {
+    negative = true;
+    ++start;
+  }
+  while (start != end) {
+    value *= 10;
+    value += *start++ - '0';
+  }
+  return negative ? value * -1 : value;
+}
+
 #endif// AOC_2022_CPP_COMMON_HPP

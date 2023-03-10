@@ -5,7 +5,7 @@
 
 #include "level4.hpp"
 
-const auto sample_input = R"(2-4,6-8
+static const auto sample_input = R"(2-4,6-8
 2-3,4-5
 5-7,7-9
 2-8,3-7
