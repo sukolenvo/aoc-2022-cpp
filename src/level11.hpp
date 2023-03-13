@@ -29,13 +29,13 @@ class Monkey {
   size_t reliefFactor{3};
   size_t normaliseFactor{0};
 public:
-  Monkey(const std::vector<size_t> &items,
-    const std::function<size_t(size_t)> &operation,
-    int testDivider,
-    size_t successMonkey,
-    size_t failedMonkey)
-    : items(items), operation(operation), testDivider(testDivider), successMonkey(successMonkey),
-      failedMonkey(failedMonkey)
+  Monkey(const std::vector<size_t> &items_,
+    const std::function<size_t(size_t)> &operation_,
+    int testDivider_,
+    size_t successMonkey_,
+    size_t failedMonkey_)
+    : items(items_), operation(operation_), testDivider(testDivider_), successMonkey(successMonkey_),
+      failedMonkey(failedMonkey_)
   {}
   auto getTestDivide() const {
     return testDivider;

@@ -94,7 +94,9 @@ auto runCrane9001(const auto &input) {
     auto &fromStack = task.stacks[operation[1] - 1];
     auto &toStack = task.stacks[operation[2] - 1];
     std::copy(fromStack.end() - operation[0], fromStack.end(), std::back_inserter(toStack));
-    fromStack.resize(fromStack.size() - operation[0]);
+    for (size_t i = 0; i < operation[0]; ++i) {
+      fromStack.pop_back();
+    }
   }
   std::vector<char> result;
   std::transform(task.stacks.cbegin(), task.stacks.cend(), std::back_inserter(result), [](const auto &stack) {
