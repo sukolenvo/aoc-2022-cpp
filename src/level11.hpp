@@ -79,7 +79,7 @@ auto readDigits(auto &start, const auto &end) {
 }
 
 auto buildOperation(auto &start, const auto &end) {
-  auto leftIsItem = *start == 'o';
+  auto leftIsItem = static_cast<size_t>(*start == 'o');
   size_t leftValue = 0;
   if (leftIsItem) {
     start += 4;
@@ -100,7 +100,7 @@ auto buildOperation(auto &start, const auto &end) {
     throw std::invalid_argument("unexpected operation");
   }
   start += 2;
-  auto rightIsItem = *start == 'o';
+  auto rightIsItem = static_cast<size_t>(*start == 'o');
   size_t rightValue = 0;
   if (rightIsItem) {
     start += 4;
@@ -109,8 +109,8 @@ auto buildOperation(auto &start, const auto &end) {
     ++start;
   }
   return [=](size_t item) {
-    auto left = leftIsItem ? item : leftValue;
-    auto right = rightIsItem ? item : rightValue;
+    const size_t left = leftIsItem ? item : leftValue;
+    const size_t right = rightIsItem ? item : rightValue;
     return operation(left, right);
   };
 }

@@ -24,9 +24,9 @@ class Directory {
 public:
   Directory(const Directory &copy) = delete;
   Directory(Directory &&move) = default;
-  explicit Directory(Directory *parentDir, const auto &dirName) : parent(parentDir) {
+  explicit Directory(Directory *parentDir, const auto &dirName) : path(), parent(parentDir) {
     if (parentDir == nullptr) {
-      path = "/";
+      path = std::string("/");
     } else {
       path = parentDir->path + std::string(dirName) + "/";
     }
