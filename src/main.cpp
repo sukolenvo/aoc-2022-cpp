@@ -16,6 +16,7 @@
 #include "level11.hpp"
 #include "level12.hpp"
 #include "level13.hpp"
+#include "level14.hpp"
 
 int main(int argc, const char **argv) // NOLINT(bugprone-exception-escape) check is unreliable on Windows, see: https://stackoverflow.com/questions/61014184/clang-tidys-bugprone-exception-escape-behaves-weirdly-with-msvc-stl
 {
@@ -34,6 +35,7 @@ int main(int argc, const char **argv) // NOLINT(bugprone-exception-escape) check
       std::function(&level11::run),
       std::function(&level12::run),
       std::function(&level13::run),
+      std::function(&level14::run),
     };
     size_t level = levels.size();
     if (argc == 2) {
