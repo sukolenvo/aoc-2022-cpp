@@ -18,7 +18,7 @@ Valve HH has flow rate=22; tunnel leads to valve GG
 Valve II has flow rate=0; tunnels lead to valves AA, JJ
 Valve JJ has flow rate=21; tunnel leads to valve II)";
 
-TEST_CASE("level16:parseInput", "[leve16]") {
+TEST_CASE("level16:parseInput", "[level16]") {
   auto valves = level16::parseInput(sampleInput);
   REQUIRE(valves.size() == 10);
   REQUIRE(valves[0].getId() == std::string_view("AA"));
@@ -27,7 +27,7 @@ TEST_CASE("level16:parseInput", "[leve16]") {
   REQUIRE(valves[1].getRate() == 13);
 }
 
-TEST_CASE("level16:solve", "[leve16]") {
+TEST_CASE("level16:solve", "[level16]") {
   REQUIRE(level16::part1(sampleInput) == 1651);
   REQUIRE(level16::part2(sampleInput) == 1707); //2521
 }
