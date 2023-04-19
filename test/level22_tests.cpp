@@ -29,9 +29,9 @@ auto oppositeDirection(const auto &direction) {
 TEST_CASE("level22:part2handleOOBsample", "[level22]")
 {
   const std::vector<std::string_view> lines(12);
-  level22::Direction startDirection;
-  int startX;
-  int startY;
+  level22::Direction startDirection{};
+  int startX{};
+  int startY{};
   SECTION("UP") {
     startDirection = level22::Direction::up;
     std::tie(startX, startY) = GENERATE(
@@ -83,9 +83,9 @@ TEST_CASE("level22:part2handleOOBsample", "[level22]")
 TEST_CASE("level22:part2handleOOBtask", "[level22]")
 {
   const std::vector<std::string_view> lines(16);
-  level22::Direction startDirection;
-  int startX;
-  int startY;
+  level22::Direction startDirection{};
+  int startX{};
+  int startY{};
   SECTION("UP") {
     startDirection = level22::Direction::up;
     std::tie(startX, startY) = GENERATE(
