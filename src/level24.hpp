@@ -36,7 +36,7 @@ auto walk(auto &blizzards, const auto rows, const auto columns,
       return blizzard.row == row && blizzard.column == column;
     });
   };
-  const auto positionHash = [](const auto &position) {
+  auto positionHash = [](const auto &position) {
     return position.first * 1000 + position.second;
   };
   const auto runBlizzards = [&] {
