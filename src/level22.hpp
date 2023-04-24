@@ -11,6 +11,7 @@
 #include <exception>
 #include <iostream>
 #include <iterator>
+#include <numeric>
 #include <string_view>
 #include <utility>
 #include <vector>

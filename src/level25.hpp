@@ -9,6 +9,7 @@
 #include <cmath>
 #include <exception>
 #include <iostream>
+#include <numeric>
 #include <string>
 
 #include "common.hpp"
@@ -17,10 +18,11 @@ namespace level25 {
 
 static const auto snafuBase = 5;
 
-auto fromSnafu(const auto &value) {
+auto fromSnafu(const auto &value)
+{
   long result = 0;
   for (size_t i = 0; i < value.size(); i++) {
-    switch(value[i]) {
+    switch (value[i]) {
       case '2':
         result += static_cast<decltype(result)>(std::pow(snafuBase, value.size() - 1 - i)) * 2;
         break;
@@ -42,11 +44,12 @@ auto fromSnafu(const auto &value) {
   return result;
 }
 
-auto toSnafu(auto value) {
+auto toSnafu(auto value)
+{
   std::string result;
   while (value > 0) {
     auto digit = value % snafuBase;
-    switch(digit) {
+    switch (digit) {
       case 0:
         result.append("0");
         break;
@@ -74,11 +77,11 @@ auto toSnafu(auto value) {
   return result;
 }
 
-auto part1(const auto &input) {
+auto part1(const auto &input)
+{
   const auto lines = splitLines(input);
-  auto result = std::accumulate(lines.begin(), lines.end(), 0L, [] (const auto sum, const auto &line) {
-    return sum + fromSnafu(line);
-  });
+  auto result = std::accumulate(
+    lines.begin(), lines.end(), 0L, [](const auto sum, const auto &line) { return sum + fromSnafu(line); });
   return toSnafu(result);
 }
 
@@ -218,9 +221,10 @@ static const auto taskInput = R"(1--
 10-0-=20
 2=2=201)";
 
-void run() {
+void run()
+{
   std::cout << part1(taskInput) << '\n';
 }
-}
+}// namespace level25
 
 #endif// AOC_2022_CPP_LEVEL25_HPP

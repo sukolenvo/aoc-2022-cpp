@@ -38,8 +38,8 @@ struct Blueprint
     int clayRobotCost_,
     std::pair<int, int> obsidianRobotCost_,
     std::pair<int, int> geodeRobotCost_)
-    : id(id_), oreRobotCost(oreRobotCost_), clayRobotCost(clayRobotCost_), obsidianRobotCost(std::move(obsidianRobotCost_)),
-      geodeRobotCost(std::move(geodeRobotCost_))
+    : id(id_), oreRobotCost(oreRobotCost_), clayRobotCost(clayRobotCost_),
+      obsidianRobotCost(std::move(obsidianRobotCost_)), geodeRobotCost(std::move(geodeRobotCost_))
   {}
 
   auto canMakeOreRobot(const auto &vault) const
@@ -106,7 +106,13 @@ auto parseInput(const auto &input)
   return result;
 }
 
-void waitResources(auto &vault, const auto &production, auto oreNeeded, auto clayNeed, auto obsidianNeed, const auto &callback) {
+void waitResources(auto &vault,
+  const auto &production,
+  auto oreNeeded,
+  auto clayNeed,
+  auto obsidianNeed,
+  const auto &callback)
+{
   auto oreMissing = oreNeeded - vault.ore;
   auto clayMissing = clayNeed - vault.clay;
   auto obsidianMissing = obsidianNeed - vault.obsidian;
@@ -118,8 +124,7 @@ void waitResources(auto &vault, const auto &production, auto oreNeeded, auto cla
     if (production.clay == 0) {
       return;
     }
-    minutesWait =
-      std::max(minutesWait, clayMissing / production.clay + (clayMissing % production.clay == 0 ? 0 : 1));
+    minutesWait = std::max(minutesWait, clayMissing / production.clay + (clayMissing % production.clay == 0 ? 0 : 1));
   }
   if (obsidianMissing > 0) {
     if (production.obsidian == 0) {

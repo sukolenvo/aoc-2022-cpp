@@ -5,24 +5,26 @@
 #ifndef AOC_2022_CPP_LEVEL13_HPP
 #define AOC_2022_CPP_LEVEL13_HPP
 
-#include <iostream>
-#include <vector>
-#include <utility>
-#include <exception>
-#include <variant>
 #include <algorithm>
+#include <exception>
 #include <functional>
+#include <iostream>
 #include <iterator>
+#include <numeric>
+#include <utility>
+#include <variant>
+#include <vector>
 
 #include "common.hpp"
 
-namespace level13
-{
+namespace level13 {
 
-struct Packet {
+struct Packet
+{
   std::vector<std::variant<int, Packet>> fragments;
 
-  bool operator ==(const Packet &other) {
+  bool operator==(const Packet &other)
+  {
     if (fragments.size() != other.fragments.size()) {
       return false;
     }
@@ -45,7 +47,8 @@ struct Packet {
   }
 };
 
-auto parseNumber(auto &input) {
+auto parseNumber(auto &input)
+{
   int result = 0;
   while (*input >= '0' && *input <= '9') {
     result *= 10;
@@ -54,10 +57,11 @@ auto parseNumber(auto &input) {
   return result;
 }
 
-Packet parsePacket(auto &line) {
+Packet parsePacket(auto &line)
+{
   Packet result;
   ++line;
-  while(true) {
+  while (true) {
     if (*line == '[') {
       result.fragments.push_back(parsePacket(line));
     }
@@ -75,10 +79,11 @@ Packet parsePacket(auto &line) {
   }
 }
 
-auto parseInput(const auto &input) {
+auto parseInput(const auto &input)
+{
   auto lines = splitLines(input);
   std::vector<std::pair<Packet, Packet>> result;
-  for (auto start = lines.begin(); start != lines.end(); ) {
+  for (auto start = lines.begin(); start != lines.end();) {
     auto rightLine = start++->begin();
     auto leftLine = start++->begin();
     result.emplace_back(parsePacket(rightLine), parsePacket(leftLine));
@@ -89,11 +94,10 @@ auto parseInput(const auto &input) {
   return result;
 }
 
-enum class PacketValidationResult {
-  VALID, INVALID, UNDEFINED
-};
+enum class PacketValidationResult { VALID, INVALID, UNDEFINED };
 
-auto validatePackets(const auto &left, const auto &right) {
+auto validatePackets(const auto &left, const auto &right)
+{
   for (size_t i = 0; i < left.fragments.size(); ++i) {
     if (i >= right.fragments.size()) {
       return PacketValidationResult::INVALID;
@@ -121,10 +125,12 @@ auto validatePackets(const auto &left, const auto &right) {
       return validationResult;
     }
   }
-  return left.fragments.size() == right.fragments.size() ? PacketValidationResult::UNDEFINED : PacketValidationResult::VALID;
+  return left.fragments.size() == right.fragments.size() ? PacketValidationResult::UNDEFINED
+                                                         : PacketValidationResult::VALID;
 }
 
-auto getValidPackets(const auto &input) {
+auto getValidPackets(const auto &input)
+{
   auto packets = parseInput(input);
   std::vector<size_t> validPackets;
   for (size_t i = 0; i < packets.size(); ++i) {
@@ -139,19 +145,22 @@ auto getValidPackets(const auto &input) {
   return validPackets;
 }
 
-auto part1(const auto &input) {
+auto part1(const auto &input)
+{
   auto validPackets = getValidPackets(input);
-  return std::accumulate(validPackets.begin(), validPackets.end(), static_cast<size_t>(0), std::plus<>()) + validPackets.size();
+  return std::accumulate(validPackets.begin(), validPackets.end(), static_cast<size_t>(0), std::plus<>())
+         + validPackets.size();
 }
 
-auto part2(const auto &input) {
+auto part2(const auto &input)
+{
   auto pairs = parseInput(input);
   std::vector<Packet> packets;
-  const Packet divider2{Packet{{ 2 }}};
-  const Packet divider6{Packet{{ 6 }}};
+  const Packet divider2{ Packet{ { 2 } } };
+  const Packet divider6{ Packet{ { 6 } } };
   packets.push_back(divider2);
   packets.push_back(divider6);
-  for (const auto &pair: pairs) {
+  for (const auto &pair : pairs) {
     packets.push_back(pair.first);
     packets.push_back(pair.second);
   }
@@ -613,10 +622,11 @@ static const auto taskInput = R"([[[[]]],[[[1,2,7,3,10],10,8,4,10]],[1,3,[],6,0]
 [[[]],[1,7,9,9,[7,8]],[],[[[2],10],2,1,[[2,4,10],[10,6],3,9],9]]
 [[0,2,10],[[],3],[[[0,2,6,5],[5,4,4]],[],[],[],4],[[1,[2],8,[7,8,0,3,7]],7,7,1,[2,[8,3,1],[],[7,8,2,7]]]])";
 
-void run() {
+void run()
+{
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }
-}
+}// namespace level13
 
 #endif// AOC_2022_CPP_LEVEL13_HPP
