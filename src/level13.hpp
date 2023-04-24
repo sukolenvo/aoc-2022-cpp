@@ -79,8 +79,8 @@ auto parseInput(const auto &input) {
   auto lines = splitLines(input);
   std::vector<std::pair<Packet, Packet>> result;
   for (auto start = lines.begin(); start != lines.end(); ) {
-    const auto *rightLine = start++->begin();
-    const auto *leftLine = start++->begin();
+    auto rightLine = start++->begin();
+    auto leftLine = start++->begin();
     result.emplace_back(parsePacket(rightLine), parsePacket(leftLine));
     if (start != lines.end()) {
       ++start;
