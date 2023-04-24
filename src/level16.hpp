@@ -55,7 +55,7 @@ auto parseInput(const auto &input) {
   for (const auto &line : lines) {
     auto start = line.begin();
     start += std::strlen("Valve ");
-    auto id = std::string_view(start, 2);
+    auto id = std::string_view(start, start + 2);
     start += std::strlen("KR has flow rate=");
     auto rate = parseNumber(start);
     start += std::strlen("; tunnel lead to valves ");
@@ -63,10 +63,10 @@ auto parseInput(const auto &input) {
       ++start;
     }
     std::vector<std::string_view> tunnels;
-    tunnels.emplace_back(start, 2);
+    tunnels.emplace_back(start, start + 2);
     while (start + 2 != line.end()) {
       start += 4;
-      tunnels.emplace_back(start, 2);
+      tunnels.emplace_back(start, start + 2);
     }
     valves.emplace_back(id, rate, std::move(tunnels));
   }

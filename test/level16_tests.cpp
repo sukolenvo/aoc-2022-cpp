@@ -29,5 +29,5 @@ TEST_CASE("level16:parseInput", "[level16]") {
 
 TEST_CASE("level16:solve", "[level16]") {
   REQUIRE(level16::part1(sampleInput) == 1651);
-  REQUIRE(level16::part2(sampleInput) == 1707); //2521
+  REQUIRE(level16::part2(sampleInput) == 1707);
 }
