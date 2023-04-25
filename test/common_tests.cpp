@@ -6,5 +6,5 @@
 
 TEST_CASE("common:readFile", "[common]")
 {
-  REQUIRE(std::string(readFile("resources/sample.txt")) == std::string("Hello World"));
+  REQUIRE(readFile("resources/sample.txt") == std::string("Hello World"));
 }

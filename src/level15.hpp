@@ -157,7 +157,7 @@ auto part2(const auto &input, int line) {
 }
 
 void run() {
-  const auto *taskInput = readTaskInput(15);
+  const auto taskInput = readTaskInput(15);
   std::cout << part1(taskInput, 2'000'000) << '\n';
   std::cout << part2(taskInput, 4'000'000) << '\n';
 }

@@ -36,7 +36,7 @@ auto searchMarker(const std::string_view &input, auto markerLength) {
 void run() {
   const int packetMarkerLength = 4;
   const int messageMarkerLength = 14;
-  const auto *taskInput = readTaskInput(6);
+  const auto taskInput = readTaskInput(6);
   std::cout << searchMarker(taskInput, packetMarkerLength) << '\n';
   std::cout << searchMarker(taskInput, messageMarkerLength) << '\n';
 }

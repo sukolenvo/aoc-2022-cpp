@@ -228,7 +228,7 @@ auto part2(const auto &input) {
 }
 
 void run() {
-  const auto *taskInput = readTaskInput(17);
+  const auto taskInput = readTaskInput(17);
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }

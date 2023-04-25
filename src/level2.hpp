@@ -58,7 +58,7 @@ int solve(const std::string_view &input, const auto &points_calculator)
 
 void run()
 {
-  const auto *taskInput = readTaskInput(2);
+  const auto taskInput = readTaskInput(2);
   std::cout << solve(taskInput, &calculatePointsPart1) << '\n';
   std::cout << solve(taskInput, &calculatePointsPart2) << '\n';
 }

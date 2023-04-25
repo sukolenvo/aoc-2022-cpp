@@ -87,7 +87,7 @@ auto part1(const auto &input)
 
 void run()
 {
-  const auto *taskInput = readTaskInput(25);
+  const auto taskInput = readTaskInput(25);
   std::cout << part1(taskInput) << '\n';
 }
 }// namespace level25

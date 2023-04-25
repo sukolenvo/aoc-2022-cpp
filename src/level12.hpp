@@ -157,7 +157,7 @@ end_found:
 }
 
 void run() {
-  const auto *taskInput = readTaskInput(12);
+  const auto taskInput = readTaskInput(12);
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }

@@ -67,7 +67,7 @@ auto solve(const auto &input) {
 }
 
 void run() {
-  const auto *taskInput = readTaskInput(9);
+  const auto taskInput = readTaskInput(9);
   std::cout << solve<2>(taskInput) << '\n';
   std::cout << solve<10>(taskInput) << '\n';
 }

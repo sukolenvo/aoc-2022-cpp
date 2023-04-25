@@ -70,7 +70,7 @@ auto part2(const std::string_view& input)
 
 void run()
 {
-  const auto *taskInput = readTaskInput(4);
+  const auto taskInput = readTaskInput(4);
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }

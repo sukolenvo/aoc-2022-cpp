@@ -107,7 +107,7 @@ auto runCrane9001(const auto &input) {
 
 void run()
 {
-  const auto *taskInput = readTaskInput(5);
+  const auto taskInput = readTaskInput(5);
   for (const auto &block : runCrane9000(taskInput)) {
     std::cout << block;
   }

@@ -64,7 +64,7 @@ template<auto N> int solve(const std::string_view &input)
 
 void run()
 {
-  const auto *taskInput = readTaskInput(1);
+  const auto taskInput = readTaskInput(1);
   std::cout << solve<1>(taskInput) << '\n';
   std::cout << solve<3>(taskInput) << '\n';
 }

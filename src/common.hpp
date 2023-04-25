@@ -50,13 +50,10 @@ inline auto readFile(auto filename)
 {
   std::ifstream stream(filename);
   if (stream.is_open()) {
-    auto* pbuf = stream.rdbuf();
-    const long size = pbuf->pubseekoff(0, stream.end, stream.in);
-    pbuf->pubseekpos(0, stream.in);
-    char* buffer = new char[static_cast<unsigned long>(size + 1)]();
-    pbuf->sgetn (buffer,size);
+    std::stringstream buffer;
+    buffer << stream.rdbuf();
     stream.close();
-    return buffer;
+    return buffer.str();
   } else {
     throw std::runtime_error("Failed to open task input file");
   }
