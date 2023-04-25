@@ -5,6 +5,7 @@
 #ifndef AOC_2022_CPP_COMMON_HPP
 #define AOC_2022_CPP_COMMON_HPP
 
+#include <array>
 #include <cstdio>
 #include <exception>
 #include <fstream>
