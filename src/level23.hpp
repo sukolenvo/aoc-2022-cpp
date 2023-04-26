@@ -5,6 +5,7 @@
 #ifndef AOC_2022_CPP_LEVEL23_HPP
 #define AOC_2022_CPP_LEVEL23_HPP
 
+#pragma warning(push, 0) // there are warning in MSVC, ignore them
 #include <algorithm>
 #include <array>
 #include <functional>
@@ -12,6 +13,7 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+#pragma warning(pop) // re-enable warnings
 
 #include "common.hpp"
 
