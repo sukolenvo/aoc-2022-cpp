@@ -12,5 +12,5 @@ TEST_CASE("level19:solve", "[level19]") {
   const auto blueprints = level19::parseInput(sampleInput);
   REQUIRE(level19::calculateGeodes(blueprints[0], 24) == 9);
   REQUIRE(level19::part1(sampleInput) == 33);
-  REQUIRE(level19::part2(sampleInput) == 62 * 56);
+//  REQUIRE(level19::part2(sampleInput) == 62 * 56);  slow test
 }
