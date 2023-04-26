@@ -25,18 +25,23 @@ struct Packet
 
   bool operator==(const Packet &other)
   {
-    if (fragments.size() != other.fragments.size()) {
+    return compareFragments(this->fragments, other.fragments);
+  }
+
+private:
+  bool compareFragments(const auto &left, const auto &right) { //NOLINT(misc-no-recursion)
+    if (left.size() != right.size()) {
       return false;
     }
-    for (size_t i = 0; i < fragments.size(); ++i) {
-      if (std::holds_alternative<int>(fragments[i]) && std::holds_alternative<int>(other.fragments[i])) {
-        if (std::get<int>(fragments[i]) != std::get<int>(other.fragments[i])) {
+    for (size_t i = 0; i < left.size(); ++i) {
+      if (std::holds_alternative<int>(left[i]) && std::holds_alternative<int>(right[i])) {
+        if (std::get<int>(left[i]) != std::get<int>(right[i])) {
           return false;
         }
         continue;
       }
-      if (std::holds_alternative<Packet>(fragments[i]) && std::holds_alternative<Packet>(other.fragments[i])) {
-        if (std::get<Packet>(fragments[i]) != std::get<Packet>(other.fragments[i])) {
+      if (std::holds_alternative<Packet>(left[i]) && std::holds_alternative<Packet>(right[i])) {
+        if (!compareFragments(std::get<Packet>(left[i]).fragments, std::get<Packet>(right[i]).fragments)) {
           return false;
         }
         continue;
@@ -57,7 +62,7 @@ auto parseNumber(auto &input)
   return result;
 }
 
-Packet parsePacket(auto &line)
+Packet parsePacket(auto &line) //NOLINT(misc-no-recursion)
 {
   Packet result;
   ++line;
@@ -96,7 +101,7 @@ auto parseInput(const auto &input)
 
 enum class PacketValidationResult { VALID, INVALID, UNDEFINED };
 
-auto validatePackets(const auto &left, const auto &right)
+auto validatePackets(const auto &left, const auto &right) //NOLINT(misc-no-recursion)
 {
   for (size_t i = 0; i < left.fragments.size(); ++i) {
     if (i >= right.fragments.size()) {
