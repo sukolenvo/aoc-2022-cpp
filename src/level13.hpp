@@ -63,10 +63,10 @@ Packet parsePacket(auto &line)
   ++line;
   while (true) {
     if (*line == '[') {
-      result.fragments.push_back(parsePacket(line));
+      result.fragments.emplace_back(parsePacket(line));
     }
     if (*line >= '0' && *line <= '9') {
-      result.fragments.push_back(parseNumber(line));
+      result.fragments.emplace_back(parseNumber(line));
     }
     if (*line == ']') {
       ++line;
