@@ -108,7 +108,7 @@ jobs:
           script: |
             core.setFailed('There is a mismatch between configured llvm compiler and clang-tidy version chosen')
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup Cache
         uses: ./.github/actions/setup_cache
@@ -170,8 +170,7 @@ jobs:
         if: runner.os == 'Windows'
         working-directory: ./build
         run: |
-          ctest -C ${{matrix.build_type}} --output-on-failure
-          OpenCppCoverage.exe --sources src* --modules tests.exe --export_type cobertura:coverage.xml --cover_children -- ctest -C ${{matrix.build_type}}
+          OpenCppCoverage.exe --sources src* --modules tests.exe --export_type cobertura:coverage.xml --cover_children -- ctest -C ${{matrix.build_type}} --output-on-failure
 
       - name: CPack
         if: matrix.package_generator != ''
