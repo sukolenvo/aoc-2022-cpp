@@ -44,17 +44,17 @@ TEST_CASE("level23:moveElves", "[level23]") {
   }
   CAPTURE(rounds);
   const auto elves = level23::moveElves(sampleInput, rounds);
-  const auto minX = std::min_element(elves.begin(), elves.end(), [](const auto &left, const auto &right) {
-    return left.x < right.x;
+  const auto minX = std::min_element(elves.begin(), elves.end(), [](const auto &l, const auto &r) {
+    return l.x < r.x;
   })->x;
-  const auto maxX = std::max_element(elves.begin(), elves.end(), [](const auto &left, const auto &right) {
-    return left.x < right.x;
+  const auto maxX = std::max_element(elves.begin(), elves.end(), [](const auto &l, const auto &r) {
+    return l.x < r.x;
   })->x;
-  const auto minY = std::min_element(elves.begin(), elves.end(), [](const auto &left, const auto &right) {
-    return left.y < right.y;
+  const auto minY = std::min_element(elves.begin(), elves.end(), [](const auto &l, const auto &r) {
+    return l.y < r.y;
   })->y;
-  const auto maxY = std::max_element(elves.begin(), elves.end(), [](const auto &left, const auto &right) {
-    return left.y < right.y;
+  const auto maxY = std::max_element(elves.begin(), elves.end(), [](const auto &l, const auto &r) {
+    return l.y < r.y;
   })->y;
   std::string map;
   for (int y = minY; y <= maxY; ++y) {

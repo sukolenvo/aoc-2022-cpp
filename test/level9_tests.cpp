@@ -25,11 +25,7 @@ U 20)";
 
 TEST_CASE("level9:solve", "[level9]")
 {
-  std::cout << 2 << '\n';
   REQUIRE(level9::solve<2>(sampleInput) == 13);
-  std::cout << 10 << '\n';
   REQUIRE(level9::solve<10>(sampleInput) == 1);
-  std::cout << "input 2" << '\n';
   REQUIRE(level9::solve<10>(sampleInput2) == 36);
-  std::cout << "done" << '\n';
 }

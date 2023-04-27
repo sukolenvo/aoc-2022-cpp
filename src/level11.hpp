@@ -5,7 +5,6 @@
 #ifndef AOC_2022_CPP_LEVEL11_HPP
 #define AOC_2022_CPP_LEVEL11_HPP
 
-#pragma warning(push, 0) // there are warning in MSVC, ignore them
 #include <algorithm>
 #include <cstring>
 #include <exception>
@@ -14,7 +13,6 @@
 #include <numeric>
 #include <string_view>
 #include <vector>
-#pragma warning(pop) // re-enable warnings
 
 #include "common.hpp"
 

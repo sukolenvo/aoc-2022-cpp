@@ -16,17 +16,18 @@
 inline std::vector<std::string_view> splitLines(const std::string_view &input)
 {
   std::vector<std::string_view> lines;
-  auto start = 0;
-  auto index = 1;
-  for (const auto &item : input) {
-    if (item == '\n') {
-      lines.emplace_back(input.begin() + start, input.begin() + index - 1);
-      start = index;
+  size_t start = 0;
+  while(start < input.size()) {
+    auto sepratorIndex = input.find('\n', start);
+    if (sepratorIndex == std::string_view::npos) {
+      if (start < input.size()) {
+        lines.emplace_back(input.begin() + static_cast<std::string_view::difference_type>(start), input.end());
+      }
+      break;
     }
-    ++index;
-  }
-  if (start != index - 1) {
-    lines.emplace_back(input.begin() + start, input.begin() + index - 1);
+    lines.emplace_back(input.begin() + static_cast<std::string_view::difference_type>(start),
+      input.begin() + static_cast<std::string_view::difference_type>(sepratorIndex));
+    start = sepratorIndex + 1;
   }
   return lines;
 }
@@ -61,7 +62,7 @@ inline auto readFile(auto filename)
 
 inline auto readTaskInput(auto level)
 {
-  std::array<char, 100> filename;
+  std::array<char, 100> filename{};
   auto status = std::snprintf(filename.data(), filename.max_size(), "input/task%d.txt", level);
   if (status < 0 || static_cast<size_t>(status) >= filename.max_size()) {
     throw std::runtime_error("Failed to construct task input filename");
