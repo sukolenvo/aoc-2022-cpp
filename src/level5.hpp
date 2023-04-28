@@ -7,14 +7,13 @@
 
 #include <algorithm>
 #include <exception>
-#include <stack>
 #include <iostream>
 #include <iterator>
+#include <stack>
 
 #include "common.hpp"
 
-namespace level5
-{
+namespace level5 {
 
 struct Task
 {
@@ -49,29 +48,26 @@ auto parseInput(const auto &input)
       }
     }
   }
-  const auto readDigits = [](auto &start) {
+  const auto readDigits = [](auto &start, const auto &end) {
     unsigned int result = 0;
-    char next = *start;
-    while (next >= '0' && next <= '9') {
+    while (start != end && *start >= '0' && *start <= '9') {
       result *= 10;
-      result += static_cast<unsigned int>(next - '0');
-      next = *++start;
+      result += static_cast<unsigned int>(*start++ - '0');
     }
     return result;
   };
   for (auto it = lines.begin() + static_cast<long>(dividerIndex) + 1; it != lines.end(); ++it) {
     auto line = it->begin();
-    task.operations.push_back(std::array<unsigned int, 3>{
-      readDigits(line = line + sizeof("move ") - 1),
-      readDigits(line = line + sizeof(" from ") - 1),
-      readDigits(line = line + sizeof(" to ") - 1)
-    });
+    task.operations.push_back(std::array<unsigned int, 3>{ readDigits(line = line + sizeof("move ") - 1, it->end()),
+      readDigits(line = line + sizeof(" from ") - 1, it->end()),
+      readDigits(line = line + sizeof(" to ") - 1, it->end()) });
   }
   return task;
 }
 
 
-auto runCrane9000(const auto &input) {
+auto runCrane9000(const auto &input)
+{
   auto task = parseInput(input);
   for (const auto &operation : task.operations) {
     for (size_t i = 0; i < operation[0]; ++i) {
@@ -88,7 +84,8 @@ auto runCrane9000(const auto &input) {
   return result;
 }
 
-auto runCrane9001(const auto &input) {
+auto runCrane9001(const auto &input)
+{
   auto task = parseInput(input);
   for (const auto &operation : task.operations) {
     auto &fromStack = task.stacks[operation[1] - 1];
@@ -117,6 +114,6 @@ void run()
   }
   std::cout << '\n';
 }
-}
+}// namespace level5
 
 #endif// AOC_2022_CPP_LEVEL5_HPP
