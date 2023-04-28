@@ -116,7 +116,7 @@ auto part2(const auto &input) {
   for (size_t i = 0; i < lines.size(); ++i) {
     for (size_t j = 0; j < lines[0].size(); ++j) {
       if (lines[i][j] == '#') {
-        elves.emplace_back(j + padding, i + padding);
+        elves.emplace_back(static_cast<int>(j + padding), static_cast<int>(i + padding));
         map[i + padding][j + padding] = elves.size();
       }
     }

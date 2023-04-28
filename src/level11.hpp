@@ -125,7 +125,7 @@ auto buildOperation(auto &start, const auto &end)
 
 auto parseInput(const auto &taskInput)
 {
-  std::vector<Monkey> result;
+  std::vector<Monkey> result{};
   auto input = std::string_view{ taskInput };
   for (auto start = input.begin(); start != input.end();) {
     while (*start == '\n') {
@@ -143,9 +143,9 @@ auto parseInput(const auto &taskInput)
     }
     ++start;// newline
     start += std::strlen("  Operation: new = ");
-    auto operation = buildOperation(start, input.end());
+    const auto operation = buildOperation(start, input.end());
     start += std::strlen("  Test: divisible by ");
-    size_t testDivider = readDigits(start, input.end());
+    auto testDivider = static_cast<int>(readDigits(start, input.end()));
     ++start;// newline
     start += std::strlen("    If true: throw to monkey ");
     size_t successMonkey = readDigits(start, input.end());

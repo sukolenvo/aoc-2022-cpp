@@ -5,22 +5,21 @@
 #ifndef AOC_2022_CPP_LEVEL9_HPP
 #define AOC_2022_CPP_LEVEL9_HPP
 
+#include <array>
+#include <cmath>
+#include <exception>
 #include <iostream>
 #include <set>
 #include <utility>
-#include <exception>
-#include <cmath>
-#include <array>
 
 #include "common.hpp"
 
-namespace level9
-{
+namespace level9 {
 
-template<auto ropeLength>
-auto solve(const auto &input) {
+template<auto ropeLength> auto solve(const auto &input)
+{
   auto lines = splitLines(input);
-  std::set<std::pair<int, int>> visited = {{0, 0}};
+  std::set<std::pair<int, int>> visited = { { 0, 0 } };
   std::array<std::pair<int, int>, ropeLength> rope;
   for (const auto &line : lines) {
     if (line.empty()) {
@@ -50,7 +49,9 @@ auto solve(const auto &input) {
       for (size_t j = 1; j < ropeLength; ++j) {
         auto deltaX = rope.at(j - 1).first - rope.at(j).first;
         auto deltaY = rope.at(j - 1).second - rope.at(j).second;
-        if (std::abs(deltaX) <= 1 && std::abs(deltaY) <= 1) { continue; }
+        if (std::abs(deltaX) <= 1 && std::abs(deltaY) <= 1) {
+          continue;
+        }
         if (deltaX == 0) {
           rope.at(j).second += deltaY / 2;
         } else if (deltaY == 0) {
@@ -66,12 +67,13 @@ auto solve(const auto &input) {
   return visited.size();
 }
 
-void run() {
+void run()
+{
   const auto taskInput = readTaskInput(9);
   std::cout << solve<2>(taskInput) << '\n';
   std::cout << solve<10>(taskInput) << '\n';
 }
 
-}
+}// namespace level9
 
 #endif// AOC_2022_CPP_LEVEL9_HPP
