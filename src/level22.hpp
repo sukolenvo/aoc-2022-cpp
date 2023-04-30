@@ -59,12 +59,34 @@ auto turn(auto direction, auto side)
   return static_cast<Direction>((static_cast<int>(direction) + 1) % 4);
 }
 
-auto walk(const auto &input, auto handleOutOfBounds)
+auto isOOB(const auto &nextPosition, const auto &lines) {
+  if (nextPosition.first < 0) {
+    return true;
+  }
+  if (nextPosition.second < 0) {
+    return true;
+  }
+  if (lines.size() == static_cast<size_t>(nextPosition.second)) {
+    return true;
+  }
+  if (lines[static_cast<size_t>(nextPosition.second)].size() <= static_cast<size_t>(nextPosition.first)) {
+    return true;
+  }
+  if (lines[static_cast<size_t>(nextPosition.second)][static_cast<size_t>(nextPosition.first)] == ' ') {
+    return true;
+  }
+  return false;
+}
+
+auto walk(const auto &input, const auto &handleOutOfBounds)
 {
   auto lines = splitLines(input);
+  if (lines.size() < 3) { // gcc-12 shows warnings for read operations without checking size of input on Win
+    throw std::runtime_error("invalid input");
+  }
   auto instructions = lines.back();
   lines.erase(lines.end() - 2, lines.end());
-  auto x = static_cast<int>(std::distance(lines[0].begin(), std::find(lines[0].begin(), lines[0].end(), '.')));
+  auto x = static_cast<int>(std::distance(lines.front().begin(), std::find(lines.front().begin(), lines.front().end(), '.')));
   int y = 0;
   auto direction = Direction::right;
   auto instruction = instructions.begin();
@@ -73,10 +95,7 @@ auto walk(const auto &input, auto handleOutOfBounds)
     for (auto i = 0; i < distance; ++i) {
       auto nextPosition = getNextPosition(x, y, direction);
       auto nextDirection = direction;
-      auto outOfBounds =
-        nextPosition.first < 0 || nextPosition.second < 0 || lines.size() == static_cast<size_t>(nextPosition.second)
-        || lines[static_cast<size_t>(nextPosition.second)].size() <= static_cast<size_t>(nextPosition.first)
-        || lines[static_cast<size_t>(nextPosition.second)][static_cast<size_t>(nextPosition.first)] == ' ';
+      auto outOfBounds = isOOB(nextPosition, lines);
       if (outOfBounds) {
         handleOutOfBounds(nextDirection, nextPosition, lines);
       }
