@@ -9,7 +9,7 @@
 #include <cmath>
 #include <exception>
 #include <iostream>
-#include <set>
+#include <unordered_set>
 #include <utility>
 
 #include "common.hpp"
@@ -19,7 +19,10 @@ namespace level9 {
 template<auto ropeLength> auto solve(const auto &input)
 {
   auto lines = splitLines(input);
-  std::set<std::pair<int, int>> visited = { { 0, 0 } };
+  static const auto hashFunction = [](const auto &item) {
+    return std::hash<int>()(item.first * ropeLength + item.second);
+  };
+  std::unordered_set<std::pair<int, int>, decltype(hashFunction)> visited;
   std::array<std::pair<int, int>, ropeLength> rope;
   for (const auto &line : lines) {
     if (line.empty()) {
