@@ -63,6 +63,7 @@ inline auto readFile(auto filename)
 inline auto readTaskInput(auto level)
 {
   std::array<char, 100> filename{};
+  filename.fill(0);
   auto status = std::snprintf(filename.data(), filename.max_size(), "input/task%d.txt", level);
   if (status < 0 || static_cast<size_t>(status) >= filename.max_size()) {
     throw std::runtime_error("Failed to construct task input filename");

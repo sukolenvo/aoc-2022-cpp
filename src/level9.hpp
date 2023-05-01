@@ -24,6 +24,7 @@ template<auto ropeLength> auto solve(const auto &input)
   };
   std::unordered_set<std::pair<int, int>, decltype(hashFunction)> visited;
   std::array<std::pair<int, int>, ropeLength> rope;
+  rope.fill({ 0, 0 });
   for (const auto &line : lines) {
     if (line.empty()) {
       continue;

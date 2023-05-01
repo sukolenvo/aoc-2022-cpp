@@ -42,6 +42,7 @@ void saveDwarf(auto &topDwarfs, int food)
 template<auto N> int solve(const std::string_view &input)
 {
   std::array<int, N> topDwarfs{};
+  topDwarfs.fill(0);
   int current = 0;
   for (const auto &line : splitLines(input)) {
     if (line.begin() == line.end()) {
