@@ -272,6 +272,6 @@ void run()
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }
-}// namespace level19
+} // namespace level19
 
-#endif// AOC_2022_CPP_LEVEL19_HPP
+#endif // AOC_2022_CPP_LEVEL19_HPP

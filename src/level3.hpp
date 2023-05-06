@@ -5,18 +5,18 @@
 #ifndef AOC_2022_CPP_LEVEL3_HPP
 #define AOC_2022_CPP_LEVEL3_HPP
 
-#include <string_view>
-#include <iostream>
-#include <exception>
-#include <vector>
 #include <algorithm>
+#include <exception>
+#include <iostream>
 #include <set>
+#include <string_view>
+#include <vector>
 
 #include "common.hpp"
 
 namespace level3 {
 
-auto findSharedItems(const auto& left, const auto& right)
+auto findSharedItems(const auto &left, const auto &right)
 {
   std::set<char> sharedItems;
   auto leftIterator = left.begin();
@@ -35,7 +35,7 @@ auto findSharedItems(const auto& left, const auto& right)
   return sharedItems;
 }
 
-int part1(const std::string_view& input)
+int part1(const std::string_view &input)
 {
   auto lines = splitLines(input);
   int totalPriority = 0;
@@ -43,16 +43,17 @@ int part1(const std::string_view& input)
     if (line.size() % 2 == 1) {
       throw std::invalid_argument("odd size rucksack");
     }
-    auto left = std::vector<char>{line.begin(), line.begin() + line.size() / 2};
-    auto right = std::vector<char>{line.begin() + line.size() / 2, line.end()};
+    auto left = std::vector<char>{ line.begin(), line.begin() + line.size() / 2 };
+    auto right = std::vector<char>{ line.begin() + line.size() / 2, line.end() };
     std::sort(left.begin(), left.end());
     std::sort(right.begin(), right.end());
     auto sharedItems = findSharedItems(left, right);
-    for (const auto& sharedItem : sharedItems) {
+    for (const auto &sharedItem : sharedItems) {
       if (sharedItem >= 'a' && sharedItem <= 'z') {
         totalPriority += sharedItem - 'a' + 1;
       } else if (sharedItem >= 'A' && sharedItem <= 'Z') {
-        totalPriority += sharedItem - 'A' + 27; // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+        totalPriority +=
+          sharedItem - 'A' + 27; // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
       } else {
         throw std::runtime_error("unexpected shared item");
       }
@@ -61,7 +62,7 @@ int part1(const std::string_view& input)
   return totalPriority;
 }
 
-int part2(const std::string_view& input)
+int part2(const std::string_view &input)
 {
   auto lines = splitLines(input);
   int totalPriority = 0;
@@ -72,20 +73,21 @@ int part2(const std::string_view& input)
     auto firstLine = *begin++;
     auto secondLine = *begin++;
     auto thirdLine = *begin++;
-    auto firstCopy = std::vector<char>{firstLine.begin(), firstLine.end()};
-    auto secondCopy = std::vector<char>{secondLine.begin(), secondLine.end()};
-    auto thirdCopy = std::vector<char>{thirdLine.begin(), thirdLine.end()};
+    auto firstCopy = std::vector<char>{ firstLine.begin(), firstLine.end() };
+    auto secondCopy = std::vector<char>{ secondLine.begin(), secondLine.end() };
+    auto thirdCopy = std::vector<char>{ thirdLine.begin(), thirdLine.end() };
     std::sort(firstCopy.begin(), firstCopy.end());
     std::sort(secondCopy.begin(), secondCopy.end());
     std::sort(thirdCopy.begin(), thirdCopy.end());
     auto sharedItems12 = findSharedItems(firstCopy, secondCopy);
     auto sharedItems23 = findSharedItems(secondCopy, thirdCopy);
     auto sharedItems = findSharedItems(sharedItems12, sharedItems23);
-    for (const auto& sharedItem : sharedItems) {
+    for (const auto &sharedItem : sharedItems) {
       if (sharedItem >= 'a' && sharedItem <= 'z') {
         totalPriority += sharedItem - 'a' + 1;
       } else if (sharedItem >= 'A' && sharedItem <= 'Z') {
-        totalPriority += sharedItem - 'A' + 27; // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+        totalPriority +=
+          sharedItem - 'A' + 27; // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
       } else {
         throw std::runtime_error("unexpected shared item");
       }
@@ -100,6 +102,6 @@ void run()
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }
-}
+} // namespace level3
 
-#endif// AOC_2022_CPP_LEVEL3_HPP
+#endif // AOC_2022_CPP_LEVEL3_HPP

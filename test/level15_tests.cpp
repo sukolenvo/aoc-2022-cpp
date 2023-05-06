@@ -22,7 +22,8 @@ Sensor at x=16, y=7: closest beacon is at x=15, y=3
 Sensor at x=14, y=3: closest beacon is at x=15, y=3
 Sensor at x=20, y=1: closest beacon is at x=15, y=3)";
 
-TEST_CASE("level15:parseInput", "[level15]") {
+TEST_CASE("level15:parseInput", "[level15]")
+{
   auto beacons = level15::parseInput(sampleInput);
   REQUIRE(beacons.size() == 14);
   REQUIRE(beacons[0].getSensorX() == 2);
@@ -31,7 +32,8 @@ TEST_CASE("level15:parseInput", "[level15]") {
   REQUIRE(beacons[0].getBeaconY() == 15);
 }
 
-TEST_CASE("level15:solve", "[level15]") {
+TEST_CASE("level15:solve", "[level15]")
+{
   REQUIRE(level15::part1(sampleInput, 10) == 26);
   const auto beaconPosition = level15::findOnlyBeaconPlace(sampleInput, 20);
   REQUIRE(beaconPosition.first == 14);

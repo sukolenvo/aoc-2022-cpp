@@ -78,6 +78,6 @@ void run()
   std::cout << solve<10>(taskInput) << '\n';
 }
 
-}// namespace level9
+} // namespace level9
 
-#endif// AOC_2022_CPP_LEVEL9_HPP
+#endif // AOC_2022_CPP_LEVEL9_HPP

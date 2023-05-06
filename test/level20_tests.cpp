@@ -13,7 +13,8 @@ static const auto sampleInput = R"(1
 0
 4)";
 
-TEST_CASE("level20:solve", "[level20]") {
+TEST_CASE("level20:solve", "[level20]")
+{
   REQUIRE(level20::part1(sampleInput) == 3);
   REQUIRE(level20::part2(sampleInput) == 1623178306L);
 }

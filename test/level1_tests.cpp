@@ -28,7 +28,7 @@ TEST_CASE("level1:solve1", "[level1]")
 
 TEST_CASE("level1:save1DwarfSecond", "[level1]")
 {
-  std::array<int, 3> dwarf = {3, 1, 0};
+  std::array<int, 3> dwarf = { 3, 1, 0 };
   level1::saveDwarf(dwarf, 2);
   REQUIRE(dwarf.at(0) == 3);
   REQUIRE(dwarf.at(1) == 2);
@@ -37,8 +37,8 @@ TEST_CASE("level1:save1DwarfSecond", "[level1]")
 
 TEST_CASE("level1:save1DwarfTop", "[level1]")
 {
-  std::array<int, 3> dwarf = {3, 0, 0};
-  level1::saveDwarf(dwarf, 5); //NOLINT
+  std::array<int, 3> dwarf = { 3, 0, 0 };
+  level1::saveDwarf(dwarf, 5); // NOLINT
   REQUIRE(dwarf.at(0) == 5);
   REQUIRE(dwarf.at(1) == 3);
   REQUIRE(dwarf.at(2) == 0);
@@ -46,7 +46,7 @@ TEST_CASE("level1:save1DwarfTop", "[level1]")
 
 TEST_CASE("level1:save1DwarfLast", "[level1]")
 {
-  std::array<int, 3> dwarf = {5, 3, 1};  //NOLINT
+  std::array<int, 3> dwarf = { 5, 3, 1 }; // NOLINT
   level1::saveDwarf(dwarf, 2);
   REQUIRE(dwarf.at(0) == 5);
   REQUIRE(dwarf.at(1) == 3);

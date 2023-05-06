@@ -129,10 +129,10 @@ auto parseInput(const auto &taskInput)
   auto input = std::string_view{ taskInput };
   for (auto start = input.begin(); start != input.end();) {
     while (*start == '\n') {
-      ++start;// skip separator line
+      ++start; // skip separator line
     }
     while (*start++ != '\n')
-      ;// skip monkey index line
+      ; // skip monkey index line
     start += std::strlen("  Starting items: ");
     std::vector<size_t> items;
     while (*start != '\n') {
@@ -141,15 +141,15 @@ auto parseInput(const auto &taskInput)
         start += 2;
       }
     }
-    ++start;// newline
+    ++start; // newline
     start += std::strlen("  Operation: new = ");
     const auto operation = buildOperation(start, input.end());
     start += std::strlen("  Test: divisible by ");
     auto testDivider = static_cast<int>(readDigits(start, input.end()));
-    ++start;// newline
+    ++start; // newline
     start += std::strlen("    If true: throw to monkey ");
     size_t successMonkey = readDigits(start, input.end());
-    ++start;// newline
+    ++start; // newline
     start += std::strlen("    If false: throw to monkey ");
     size_t failedMonkey = readDigits(start, input.end());
     result.emplace_back(items, operation, testDivider, successMonkey, failedMonkey);
@@ -201,6 +201,6 @@ void run()
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }
-}// namespace level11
+} // namespace level11
 
-#endif// AOC_2022_CPP_LEVEL11_HPP
+#endif // AOC_2022_CPP_LEVEL11_HPP

@@ -70,5 +70,5 @@ void run()
   std::cout << solve<3>(taskInput) << '\n';
 }
 
-}// namespace level1
-#endif// AOC_2022_CPP_LEVEL1_HPP
+} // namespace level1
+#endif // AOC_2022_CPP_LEVEL1_HPP
