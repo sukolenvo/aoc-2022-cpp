@@ -6,8 +6,6 @@ on:
   push:
     tags:
     branches:
-      - main
-      - develop
 
 env:
   # Conan cache environment variables
@@ -32,7 +30,7 @@ jobs:
       matrix:
         os:
           - ubuntu-22.04
-          - macos-10.15
+          - macos-11
           - windows-2019
         compiler:
           # you can specify the version after `-` like "llvm-13.0.0".
@@ -47,11 +45,6 @@ jobs:
           - ON
           - OFF
 
-        exclude:
-          # mingw is determined by this author to be too buggy to support
-          - os: windows-2019
-            compiler: gcc-112
-
         include:
           # Add appropriate variables for gcov version required. This will intentionally break
           # if you try to use a compiler that does not have gcov set
@@ -59,11 +52,6 @@ jobs:
             gcov_executable: gcov
           - compiler: llvm-14.0.0
             gcov_executable: "llvm-cov gcov"
-
-          # Set up preferred package generators, for given build configurations
-          - build_type: Release
-            developer_mode: OFF
-            package_generator: TBZ2
 
           # This exists solely to make sure a non-multiconfig build works
           - os: ubuntu-22.04
@@ -98,7 +86,6 @@ jobs:
             build_type: Release
             developer_mode: Off
             package_generator: ZIP
-
 
     steps:
       - name: Check for llvm version mismatches
@@ -142,9 +129,6 @@ jobs:
         run: |
           echo "CPATH=" > $GITHUB_ENV
 
-      - name: Cleanup Conan system packages (they are not properly cached)
-        run: |
-          conan remove -f '*/system'
 
         # make sure coverage is only enabled for Debug builds, since it sets -O0 to make sure coverage
         # has meaningful results
