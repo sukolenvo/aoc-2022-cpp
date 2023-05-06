@@ -5,34 +5,36 @@
 #ifndef AOC_2022_CPP_LEVEL14_HPP
 #define AOC_2022_CPP_LEVEL14_HPP
 
-#include <iostream>
+#include <algorithm>
 #include <cstring>
-#include <vector>
+#include <iostream>
+#include <map>
 #include <set>
 #include <utility>
-#include <algorithm>
-#include <map>
+#include <vector>
 
 #include "common.hpp"
 
-namespace level14
-{
+namespace level14 {
 
-struct RockSegment {
-  int startX; // start is top left
+struct RockSegment
+{
+  int startX;// start is top left
   int startY;
   int endX;
   int endY;
 
-  RockSegment(int x1, int y1, int x2, int y2) : startX(std::min(x1, x2)), startY(std::min(y1, y2)),
-                                                endX(std::max(x1, x2)), endY(std::max(y1, y2)) {
-  }
+  RockSegment(int x1, int y1, int x2, int y2)
+    : startX(std::min(x1, x2)), startY(std::min(y1, y2)), endX(std::max(x1, x2)), endY(std::max(y1, y2))
+  {}
 
-  bool isHorizontal() const {
+  bool isHorizontal() const
+  {
     return startY == endY;
   }
 
-  auto blocks(int x, int y) const {
+  auto blocks(int x, int y) const
+  {
     if (isHorizontal()) {
       return startY == y && startX <= x && endX >= x;
     }
@@ -40,7 +42,8 @@ struct RockSegment {
   }
 };
 
-auto parseCoordinate(auto &input, const auto &inputEnd) {
+auto parseCoordinate(auto &input, const auto &inputEnd)
+{
   int result = 0;
   while (input != inputEnd && *input >= '0' && *input <= '9') {
     result *= 10;
@@ -49,7 +52,8 @@ auto parseCoordinate(auto &input, const auto &inputEnd) {
   return result;
 }
 
-auto parseInput(const auto &input) {
+auto parseInput(const auto &input)
+{
   auto lines = splitLines(input);
   std::vector<RockSegment> result;
   for (const auto &line : lines) {
@@ -71,21 +75,20 @@ auto parseInput(const auto &input) {
   return result;
 }
 
-auto part1(const auto &input) {
+auto part1(const auto &input)
+{
   auto rocks = parseInput(input);
   std::set<std::pair<int, int>> restingSand;
   const auto caveBottom = std::max_element(rocks.begin(), rocks.end(), [](const auto &left, const auto &right) {
     return left.endY < right.endY;
   })->endY;
   auto blocked = [&](int x, int y) {
-    if (restingSand.contains({x, y})) {
+    if (restingSand.contains({ x, y })) {
       return true;
     }
-    return std::any_of(rocks.begin(), rocks.end(), [&](const auto &rock) {
-      return rock.blocks(x, y);
-    });
+    return std::any_of(rocks.begin(), rocks.end(), [&](const auto &rock) { return rock.blocks(x, y); });
   };
-  auto sandCount{0};
+  auto sandCount{ 0 };
   while (true) {
     auto sandX = 500;
     auto sandY = 0;
@@ -110,7 +113,8 @@ auto part1(const auto &input) {
   }
 }
 
-auto part2(const auto &input) {
+auto part2(const auto &input)
+{
   const auto rocks = parseInput(input);
   std::map<int, std::vector<RockSegment>> horizontalRocks;
   std::map<int, std::vector<RockSegment>> verticalRocks;
@@ -126,29 +130,27 @@ auto part2(const auto &input) {
     return left.endY < right.endY;
   })->endY;
   auto checkBlocked = [&](int x, int y) {
-    if (restingSand.contains({x, y})) {
+    if (restingSand.contains({ x, y })) {
       return true;
     }
     if (horizontalRocks.contains(y)) {
-      auto areaBlocked = std::any_of(horizontalRocks[y].begin(), horizontalRocks[y].end(), [&](const auto &rock) {
-        return rock.blocks(x, y);
-      });
+      auto areaBlocked = std::any_of(
+        horizontalRocks[y].begin(), horizontalRocks[y].end(), [&](const auto &rock) { return rock.blocks(x, y); });
       if (areaBlocked) {
         return true;
       }
     }
     if (verticalRocks.contains(x)) {
-      return std::any_of(verticalRocks[x].begin(), verticalRocks[x].end(), [&](const auto &rock) {
-        return rock.blocks(x, y);
-      });
+      return std::any_of(
+        verticalRocks[x].begin(), verticalRocks[x].end(), [&](const auto &rock) { return rock.blocks(x, y); });
     }
     return false;
   };
-  auto sandCount{0};
+  auto sandCount{ 0 };
   while (true) {
     auto sandX = 500;
     auto sandY = 0;
-    if (restingSand.contains({sandX, sandY})) {
+    if (restingSand.contains({ sandX, sandY })) {
       break;
     }
     while (true) {
@@ -175,11 +177,12 @@ auto part2(const auto &input) {
   return sandCount;
 }
 
-void run() {
+void run()
+{
   const auto taskInput = readTaskInput(14);
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }
-}
+}// namespace level14
 
 #endif// AOC_2022_CPP_LEVEL14_HPP

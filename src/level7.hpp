@@ -5,9 +5,9 @@
 #ifndef AOC_2022_CPP_LEVEL7_HPP
 #define AOC_2022_CPP_LEVEL7_HPP
 
+#include <exception>
 #include <iostream>
 #include <map>
-#include <exception>
 #include <memory>
 #include <string>
 
@@ -15,16 +15,18 @@
 
 namespace level7 {
 
-class Directory {
+class Directory
+{
   std::string path;
   Directory *parent;
-  std::map<std::string_view, Directory*> children;
+  std::map<std::string_view, Directory *> children;
   unsigned long fileSize = 0;
 
 public:
   Directory(const Directory &copy) = delete;
   Directory(Directory &&move) = default;
-  explicit Directory(Directory *parentDir, const auto &dirName) : path(), parent(parentDir) {
+  explicit Directory(Directory *parentDir, const auto &dirName) : path(), parent(parentDir)
+  {
     if (parentDir == nullptr) {
       path = std::string("/");
     } else {
@@ -32,13 +34,14 @@ public:
     }
   }
 
-  ~Directory() {
+  ~Directory()
+  {
     for (const auto &item : children) {
       delete item.second;
     }
   }
 
-  Directory* getChild(const std::string_view &location)
+  Directory *getChild(const std::string_view &location)
   {
     if (location == "..") {
       return parent;
@@ -46,30 +49,33 @@ public:
     return children.at(location);
   }
 
-  void addChildDir(const auto &dirName) {
-    children.insert({dirName, new Directory(this, dirName)});
+  void addChildDir(const auto &dirName)
+  {
+    children.insert({ dirName, new Directory(this, dirName) });
   }
 
-  void addFile(auto size) {
+  void addFile(auto size)
+  {
     fileSize += size;
   }
 
-  void traverse(auto f) const {
+  void traverse(auto f) const
+  {
     for (const auto &entry : children) {
       entry.second->traverse(f);
     }
     f(*this);
   }
 
-  auto getDirSize() const {
+  auto getDirSize() const
+  {
     unsigned long size = 0;
-    traverse([&] (const Directory &dir) {
-      size += dir.fileSize;
-    });
+    traverse([&](const Directory &dir) { size += dir.fileSize; });
     return size;
   }
 
-  auto getDirPath() const {
+  auto getDirPath() const
+  {
     return path;
   }
 };
@@ -115,32 +121,34 @@ Directory *processCd(const std::string_view &location, Directory &root, Director
     }
     end = location.find('/', start);
   }
-  if (start != location.size()) { // no trailing slash. eg: cd Downloads
+  if (start != location.size()) {// no trailing slash. eg: cd Downloads
     base = base->getChild(location.substr(start));
   }
   return base;
 }
 
 
-auto parseInput(const auto &input) {
+auto parseInput(const auto &input)
+{
   const auto lines = splitLines(input);
   auto current = lines.begin();
-  Directory root = Directory{nullptr, ""};
+  Directory root = Directory{ nullptr, "" };
   Directory *currentDir = &root;
   while (current != lines.end()) {
     auto command = *current++;
     if (command.starts_with("$ cd")) {
-        currentDir = processCd(command.substr(5), root, currentDir);
-    } else if (command =="$ ls") {
-        processLs(current, lines.end(), currentDir);
+      currentDir = processCd(command.substr(5), root, currentDir);
+    } else if (command == "$ ls") {
+      processLs(current, lines.end(), currentDir);
     } else {
-        throw std::invalid_argument("unexpected command");
+      throw std::invalid_argument("unexpected command");
     }
   }
   return root;
 }
 
-auto part1(const auto &input) {
+auto part1(const auto &input)
+{
   auto root = parseInput(input);
   unsigned int result = 0;
   root.traverse([&](const Directory &dir) {
@@ -151,7 +159,8 @@ auto part1(const auto &input) {
   return result;
 }
 
-auto part2(const auto &input) {
+auto part2(const auto &input)
+{
   auto root = parseInput(input);
   const auto minimumToDelete = root.getDirSize() - 40'000'000;
   const auto *directoryToDelete = &root;
@@ -163,7 +172,8 @@ auto part2(const auto &input) {
   return directoryToDelete->getDirSize();
 }
 
-void run() {
+void run()
+{
   const auto taskInput = readTaskInput(7);
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';

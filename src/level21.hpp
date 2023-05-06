@@ -28,16 +28,16 @@ auto parseInput(const auto &input)
 std::function<long(long, long)> buildOperation(const auto operation)
 {
   switch (operation) {
-  case '+':
-    return [](auto left, auto right) { return left + right; };
-  case '-':
-    return [](auto left, auto right) { return left - right; };
-  case '*':
-    return [](auto left, auto right) { return left * right; };
-  case '/':
-    return [](auto left, auto right) { return left / right; };
-  default:
-    throw std::runtime_error("unexpected operation");
+    case '+':
+      return [](auto left, auto right) { return left + right; };
+    case '-':
+      return [](auto left, auto right) { return left - right; };
+    case '*':
+      return [](auto left, auto right) { return left * right; };
+    case '/':
+      return [](auto left, auto right) { return left / right; };
+    default:
+      throw std::runtime_error("unexpected operation");
   }
 }
 
@@ -73,16 +73,16 @@ auto checkIsMyInput(const auto &context, const auto &var)
 auto oppositeOperation(auto operation, auto isLeft)
 {
   switch (operation) {
-  case '+':
-    return buildOperation('-');
-  case '-':
-    return isLeft ? buildOperation('+') : [](auto left, auto right) { return right - left; };
-  case '*':
-    return buildOperation('/');
-  case '/':
-    return buildOperation(isLeft ? '*' : '/');
-  default:
-    throw std::runtime_error("unexpected operation");
+    case '+':
+      return buildOperation('-');
+    case '-':
+      return isLeft ? buildOperation('+') : [](auto left, auto right) { return right - left; };
+    case '*':
+      return buildOperation('/');
+    case '/':
+      return buildOperation(isLeft ? '*' : '/');
+    default:
+      throw std::runtime_error("unexpected operation");
   }
 }
 

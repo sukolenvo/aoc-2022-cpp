@@ -5,54 +5,58 @@
 #ifndef AOC_2022_CPP_LEVEL15_HPP
 #define AOC_2022_CPP_LEVEL15_HPP
 
-#include <iostream>
-#include <vector>
-#include <cstring>
-#include <numeric>
-#include <utility>
 #include <algorithm>
-#include <set>
+#include <cstring>
 #include <exception>
+#include <iostream>
+#include <numeric>
+#include <set>
+#include <utility>
+#include <vector>
 
 #include "common.hpp"
 
-namespace level15
-{
+namespace level15 {
 
-auto distance(auto x1, auto y1, auto x2, auto y2) {
+auto distance(auto x1, auto y1, auto x2, auto y2)
+{
   return std::abs(x1 - x2) + std::abs(y1 - y2);
 }
 
-class Sensor {
+class Sensor
+{
   int sensorX;
   int sensorY;
   int beaconX;
   int beaconY;
-public:
-  Sensor(int sensorX_, int sensorY_, int beaconX_, int beaconY_) : sensorX(sensorX_),
-                                                                   sensorY(sensorY_),
-                                                                   beaconX(beaconX_),
-                                                                   beaconY(beaconY_) {
 
-  }
-  auto getSensorX() const {
+public:
+  Sensor(int sensorX_, int sensorY_, int beaconX_, int beaconY_)
+    : sensorX(sensorX_), sensorY(sensorY_), beaconX(beaconX_), beaconY(beaconY_)
+  {}
+  auto getSensorX() const
+  {
     return sensorX;
   }
 
-  auto getSensorY() const {
+  auto getSensorY() const
+  {
     return sensorY;
   }
 
-  auto getBeaconX() const {
+  auto getBeaconX() const
+  {
     return beaconX;
   }
 
-  auto getBeaconY() const {
+  auto getBeaconY() const
+  {
     return beaconY;
   }
 };
 
-auto parseNumber(auto &start, const auto &end) {
+auto parseNumber(auto &start, const auto &end)
+{
   int result = 0;
   bool negative = *start == '-';
   if (negative) {
@@ -65,7 +69,8 @@ auto parseNumber(auto &start, const auto &end) {
   return negative ? -result : result;
 }
 
-auto parseInput(const auto &input) {
+auto parseInput(const auto &input)
+{
   auto lines = splitLines(input);
   std::vector<Sensor> result;
   for (const auto &line : lines) {
@@ -83,11 +88,13 @@ auto parseInput(const auto &input) {
   return result;
 }
 
-auto part1(const auto &input, int line) {
+auto part1(const auto &input, int line)
+{
   auto sensors = parseInput(input);
   std::vector<std::pair<int, int>> deadZones;
   for (const auto &sensor : sensors) {
-    auto distanceToClosestBeacon = distance(sensor.getSensorX(), sensor.getSensorY(), sensor.getBeaconX(), sensor.getBeaconY());
+    auto distanceToClosestBeacon =
+      distance(sensor.getSensorX(), sensor.getSensorY(), sensor.getBeaconX(), sensor.getBeaconY());
     auto distanceToTargetLine = std::abs(sensor.getSensorY() - line);
     if (distanceToTargetLine >= distanceToClosestBeacon) {
       continue;
@@ -95,9 +102,8 @@ auto part1(const auto &input, int line) {
     deadZones.emplace_back(sensor.getSensorX() - distanceToClosestBeacon + distanceToTargetLine,
       sensor.getSensorX() + distanceToClosestBeacon - distanceToTargetLine);
   }
-  std::sort(deadZones.begin(), deadZones.end(), [](const auto &left, const auto &right) {
-    return left.first < right.first;
-  });
+  std::sort(
+    deadZones.begin(), deadZones.end(), [](const auto &left, const auto &right) { return left.first < right.first; });
   auto result = 0;
   for (size_t i = 0; i < deadZones.size(); ++i) {
     if (i + 1 < deadZones.size() && deadZones[i + 1].first <= deadZones[i].second) {
@@ -116,12 +122,14 @@ auto part1(const auto &input, int line) {
   return result - static_cast<int>(beaconsInTargetLine.size());
 }
 
-auto findOnlyBeaconPlace(const auto &input, int areaSize) {
+auto findOnlyBeaconPlace(const auto &input, int areaSize)
+{
   auto sensors = parseInput(input);
   for (int i = 0; i <= areaSize; ++i) {
     std::vector<std::pair<int, int>> deadZones;
     for (const auto &sensor : sensors) {
-      auto distanceToClosestBeacon = distance(sensor.getSensorX(), sensor.getSensorY(), sensor.getBeaconX(), sensor.getBeaconY());
+      auto distanceToClosestBeacon =
+        distance(sensor.getSensorX(), sensor.getSensorY(), sensor.getBeaconX(), sensor.getBeaconY());
       auto distanceToTargetLine = std::abs(sensor.getSensorY() - i);
       if (distanceToTargetLine >= distanceToClosestBeacon) {
         continue;
@@ -134,33 +142,34 @@ auto findOnlyBeaconPlace(const auto &input, int areaSize) {
 
       deadZones.emplace_back(std::max(deadZoneStart, 0), std::min(deadZoneEnd, areaSize));
     }
-    std::sort(deadZones.begin(), deadZones.end(), [](const auto &left, const auto &right) {
-      return left.first < right.first;
-    });
+    std::sort(
+      deadZones.begin(), deadZones.end(), [](const auto &left, const auto &right) { return left.first < right.first; });
     auto eliminatedTill = 0;
     for (const auto &deadZone : deadZones) {
       if (deadZone.first > eliminatedTill) {
-        return std::pair{eliminatedTill + 1, i};
+        return std::pair{ eliminatedTill + 1, i };
       }
       eliminatedTill = std::max(eliminatedTill, deadZone.second);
     }
     if (eliminatedTill < areaSize) {
-      return std::pair{areaSize, i};
+      return std::pair{ areaSize, i };
     }
   }
   throw std::runtime_error("cannot find beacon position");
 }
 
-auto part2(const auto &input, int line) {
+auto part2(const auto &input, int line)
+{
   auto result = findOnlyBeaconPlace(input, line);
   return static_cast<long>(result.first) * 4'000'000 + result.second;
 }
 
-void run() {
+void run()
+{
   const auto taskInput = readTaskInput(15);
   std::cout << part1(taskInput, 2'000'000) << '\n';
   std::cout << part2(taskInput, 4'000'000) << '\n';
 }
-}
+}// namespace level15
 
 #endif// AOC_2022_CPP_LEVEL15_HPP

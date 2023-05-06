@@ -21,7 +21,8 @@ lgvd: ljgn * ptdq
 drzm: hmdt - zczc
 hmdt: 32)";
 
-TEST_CASE("level21:solve", "[level21]") {
+TEST_CASE("level21:solve", "[level21]")
+{
   REQUIRE(level21::part1(sampleInput) == 152);
   REQUIRE(level21::part2(sampleInput) == 301);
 }

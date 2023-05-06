@@ -2,8 +2,8 @@
 // Created by object on 21/01/23.
 //
 #include <array>
-#include <vector>
 #include <catch2/catch.hpp>
+#include <vector>
 
 #include "level5.hpp"
 
@@ -26,10 +26,10 @@ TEST_CASE("parseInput", "[level5]")
   REQUIRE(result.stacks[2] == std::vector<char>{ 'P' });
 
   REQUIRE(result.operations.size() == 4);
-  REQUIRE(result.operations[0] == std::array<unsigned int, 3>{  1, 2, 1 });
-  REQUIRE(result.operations[1] == std::array<unsigned int, 3>{  3, 1, 3 });
-  REQUIRE(result.operations[2] == std::array<unsigned int, 3>{  2, 2, 1 });
-  REQUIRE(result.operations[3] == std::array<unsigned int, 3>{  1, 1, 2 });
+  REQUIRE(result.operations[0] == std::array<unsigned int, 3>{ 1, 2, 1 });
+  REQUIRE(result.operations[1] == std::array<unsigned int, 3>{ 3, 1, 3 });
+  REQUIRE(result.operations[2] == std::array<unsigned int, 3>{ 2, 2, 1 });
+  REQUIRE(result.operations[3] == std::array<unsigned int, 3>{ 1, 1, 2 });
 }
 
 TEST_CASE("level5:runCrane9000", "[level5]")

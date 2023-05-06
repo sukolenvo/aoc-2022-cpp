@@ -59,7 +59,8 @@ auto turn(auto direction, auto side)
   return static_cast<Direction>((static_cast<int>(direction) + 1) % 4);
 }
 
-auto isOOB(const auto &nextPosition, const auto &lines) {
+auto isOOB(const auto &nextPosition, const auto &lines)
+{
   if (nextPosition.first < 0) {
     return true;
   }
@@ -81,12 +82,13 @@ auto isOOB(const auto &nextPosition, const auto &lines) {
 auto walk(const auto &input, const auto &handleOutOfBounds)
 {
   auto lines = splitLines(input);
-  if (lines.size() < 3) { // gcc-12 shows warnings for read operations without checking size of input on Win
+  if (lines.size() < 3) {// gcc-12 shows warnings for read operations without checking size of input on Win
     throw std::runtime_error("invalid input");
   }
   auto instructions = lines.back();
   lines.erase(lines.end() - 2, lines.end());
-  auto x = static_cast<int>(std::distance(lines.front().begin(), std::find(lines.front().begin(), lines.front().end(), '.')));
+  auto x =
+    static_cast<int>(std::distance(lines.front().begin(), std::find(lines.front().begin(), lines.front().end(), '.')));
   int y = 0;
   auto direction = Direction::right;
   auto instruction = instructions.begin();

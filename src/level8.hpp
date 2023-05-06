@@ -5,37 +5,36 @@
 #ifndef AOC_2022_CPP_LEVEL8_HPP
 #define AOC_2022_CPP_LEVEL8_HPP
 
-#include <iostream>
-#include <vector>
-#include <set>
 #include <algorithm>
+#include <iostream>
 #include <iterator>
+#include <set>
+#include <vector>
 
 #include "common.hpp"
 
-namespace level8
-{
+namespace level8 {
 
-auto parseInput(const auto &input) {
+auto parseInput(const auto &input)
+{
   auto lines = splitLines(input);
   std::vector<std::vector<int>> forest;
   for (const auto &line : lines) {
     auto &trees = forest.emplace_back();
-    std::transform(line.cbegin(), line.cend(), std::back_inserter(trees), [](const auto &c) {
-      return c - '0';
-    });
+    std::transform(line.cbegin(), line.cend(), std::back_inserter(trees), [](const auto &c) { return c - '0'; });
   }
   return forest;
 }
 
-auto part1(const auto &input) {
+auto part1(const auto &input)
+{
   static const auto maxHeight = 9;
   auto forest = parseInput(input);
   std::set<size_t> visibleTrees;
   const auto lines = forest.size();
   const auto columns = forest[0].size();
 
-  for (size_t i = 0; i < columns; ++i) { // top
+  for (size_t i = 0; i < columns; ++i) {// top
     int lastTree = -1;
     for (size_t j = 0; j < lines; ++j) {
       if (forest[j][i] > lastTree) {
@@ -48,7 +47,7 @@ auto part1(const auto &input) {
     }
   }
 
-  for (size_t i = 0; i < lines; ++i) { // right
+  for (size_t i = 0; i < lines; ++i) {// right
     int lastTree = -1;
     for (size_t j = 0; j < columns; ++j) {
       auto column = columns - 1 - j;
@@ -62,7 +61,7 @@ auto part1(const auto &input) {
     }
   }
 
-  for (size_t i = 0; i < columns; ++i) { // bottom
+  for (size_t i = 0; i < columns; ++i) {// bottom
     int lastTree = -1;
     for (size_t j = 0; j < lines; ++j) {
       auto line = lines - 1 - j;
@@ -76,7 +75,7 @@ auto part1(const auto &input) {
     }
   }
 
-  for (size_t i = 0; i < lines; ++i) { // left
+  for (size_t i = 0; i < lines; ++i) {// left
     int lastTree = -1;
     for (size_t j = 0; j < columns; ++j) {
       if (forest[i][j] > lastTree) {
@@ -91,7 +90,8 @@ auto part1(const auto &input) {
   return visibleTrees.size();
 }
 
-auto part2(const auto &input) {
+auto part2(const auto &input)
+{
   auto forest = parseInput(input);
   size_t maxScore = 0;
   for (size_t i = 0; i < forest.size(); ++i) {
@@ -127,11 +127,12 @@ auto part2(const auto &input) {
   return maxScore;
 }
 
-void run() {
+void run()
+{
   const auto taskInput = readTaskInput(8);
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }
-}
+}// namespace level8
 
 #endif// AOC_2022_CPP_LEVEL8_HPP

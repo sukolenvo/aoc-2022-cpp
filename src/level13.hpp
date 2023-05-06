@@ -29,7 +29,8 @@ struct Packet
   }
 
 private:
-  bool compareFragments(const auto &left, const auto &right) { //NOLINT(misc-no-recursion)
+  bool compareFragments(const auto &left, const auto &right)
+  {// NOLINT(misc-no-recursion)
     if (left.size() != right.size()) {
       return false;
     }
@@ -62,7 +63,7 @@ auto parseNumber(auto &input)
   return result;
 }
 
-Packet parsePacket(auto &line) //NOLINT(misc-no-recursion)
+Packet parsePacket(auto &line)// NOLINT(misc-no-recursion)
 {
   Packet result;
   ++line;
@@ -101,7 +102,7 @@ auto parseInput(const auto &input)
 
 enum class PacketValidationResult { VALID, INVALID, UNDEFINED };
 
-auto validatePackets(const auto &left, const auto &right) //NOLINT(misc-no-recursion)
+auto validatePackets(const auto &left, const auto &right)// NOLINT(misc-no-recursion)
 {
   for (size_t i = 0; i < left.fragments.size(); ++i) {
     if (i >= right.fragments.size()) {

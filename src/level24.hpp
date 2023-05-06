@@ -16,29 +16,30 @@
 
 namespace level24 {
 
-enum class Direction {
-  UP, DOWN, LEFT, RIGHT
-};
+enum class Direction { UP, DOWN, LEFT, RIGHT };
 
-struct Blizzard {
+struct Blizzard
+{
   size_t row;
   size_t column;
   Direction direction;
-  Blizzard(const auto row_, const auto column_, const auto direction_) : row(row_), column(column_), direction(direction_) {
-
-  }
+  Blizzard(const auto row_, const auto column_, const auto direction_)
+    : row(row_), column(column_), direction(direction_)
+  {}
 };
 
-auto walk(auto &blizzards, const auto rows, const auto columns,
-  const std::pair<size_t, size_t> &from, const std::pair<size_t, size_t> &to) {
+auto walk(auto &blizzards,
+  const auto rows,
+  const auto columns,
+  const std::pair<size_t, size_t> &from,
+  const std::pair<size_t, size_t> &to)
+{
   const auto isSafe = [&](auto row, auto column) {
-    return row > 0 && row < rows - 1 && std::none_of(blizzards.begin(), blizzards.end(), [&] (const auto &blizzard) {
+    return row > 0 && row < rows - 1 && std::none_of(blizzards.begin(), blizzards.end(), [&](const auto &blizzard) {
       return blizzard.row == row && blizzard.column == column;
     });
   };
-  auto positionHash = [](const auto &position) {
-    return position.first * 1000 + position.second;
-  };
+  auto positionHash = [](const auto &position) { return position.first * 1000 + position.second; };
   const auto runBlizzards = [&] {
     for (auto &blizzard : blizzards) {
       switch (blizzard.direction) {
@@ -80,7 +81,7 @@ auto walk(auto &blizzards, const auto rows, const auto columns,
   while (true) {
     ++minutes;
     runBlizzards();
-    std::unordered_set<std::pair<size_t, size_t>, decltype(positionHash)> newPositions{from};
+    std::unordered_set<std::pair<size_t, size_t>, decltype(positionHash)> newPositions{ from };
     for (const auto &position : positions) {
       if (isSafe(position.first, position.second)) {
         newPositions.emplace(position.first, position.second);
@@ -92,7 +93,7 @@ auto walk(auto &blizzards, const auto rows, const auto columns,
         newPositions.emplace(position.first, position.second - 1);
       }
       if (position.first < rows - 2 && isSafe(position.first + 1, position.second)) {
-        newPositions.emplace(position.first +  1, position.second);
+        newPositions.emplace(position.first + 1, position.second);
       }
       if (position.second < columns - 2 && isSafe(position.first, position.second + 1)) {
         newPositions.emplace(position.first, position.second + 1);
@@ -106,7 +107,8 @@ auto walk(auto &blizzards, const auto rows, const auto columns,
   }
 }
 
-auto part1(const auto &input) {
+auto part1(const auto &input)
+{
   const auto lines = splitLines(input);
   std::vector<Blizzard> blizzards;
   for (size_t row = 0; row < lines.size(); ++row) {
@@ -127,10 +129,11 @@ auto part1(const auto &input) {
       }
     }
   }
-  return walk(blizzards, lines.size(), lines[0].size(), {0, 1}, {lines.size() - 2, lines[0].size() - 2});
+  return walk(blizzards, lines.size(), lines[0].size(), { 0, 1 }, { lines.size() - 2, lines[0].size() - 2 });
 }
 
-auto part2(const auto &input) {
+auto part2(const auto &input)
+{
   const auto lines = splitLines(input);
   std::vector<Blizzard> blizzards;
   for (size_t row = 0; row < lines.size(); ++row) {
@@ -157,11 +160,12 @@ auto part2(const auto &input) {
   return i + i1 + i2;
 }
 
-void run() {
+void run()
+{
   const auto taskInput = readTaskInput(24);
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }
-};
+};// namespace level24
 
 #endif// AOC_2022_CPP_LEVEL24_HPP
