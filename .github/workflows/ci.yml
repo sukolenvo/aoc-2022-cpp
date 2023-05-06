@@ -15,7 +15,14 @@ env:
   CLANG_TIDY_VERSION: "14.0.0"
 
 jobs:
-  Test:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: verify format
+        run: make clang-format-check
+  test:
+    needs: lint
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
