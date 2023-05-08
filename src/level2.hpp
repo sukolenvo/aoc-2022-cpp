@@ -27,7 +27,7 @@ int calculatePointsPart1(const LineInput &input)
   // -1, 2 - lost
   // adding 6 and mode 3 allows to merge different scenarios into the single outcome (eg -2, 1 => 1)
   const int outcomeBasedPoints = (input.secondInput - input.elvePlay + 6 + 1) % 3
-                                 * 3;// NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                                 * 3; // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
   return shapeBasedPoints + outcomeBasedPoints;
 }
 
@@ -44,7 +44,7 @@ int solve(const std::string_view &input, const auto &points_calculator)
   int totalScore = 0;
   for (const auto &line : lines) {
     if (line.begin() == line.end()) {
-      continue;// skip empty lines
+      continue; // skip empty lines
     }
     if (line.size() != 3) {
       throw std::invalid_argument(std::string{ "invalid line. Expecting 3 characters in line: " }.append(line.data()));
@@ -63,5 +63,5 @@ void run()
   std::cout << solve(taskInput, &calculatePointsPart2) << '\n';
 }
 
-}// namespace level2
-#endif// AOC_2022_CPP_LEVEL2_HPP
+} // namespace level2
+#endif // AOC_2022_CPP_LEVEL2_HPP

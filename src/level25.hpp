@@ -90,6 +90,6 @@ void run()
   const auto taskInput = readTaskInput(25);
   std::cout << part1(taskInput) << '\n';
 }
-}// namespace level25
+} // namespace level25
 
-#endif// AOC_2022_CPP_LEVEL25_HPP
+#endif // AOC_2022_CPP_LEVEL25_HPP

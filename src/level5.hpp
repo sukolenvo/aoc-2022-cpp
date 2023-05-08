@@ -114,6 +114,6 @@ void run()
   }
   std::cout << '\n';
 }
-}// namespace level5
+} // namespace level5
 
-#endif// AOC_2022_CPP_LEVEL5_HPP
+#endif // AOC_2022_CPP_LEVEL5_HPP

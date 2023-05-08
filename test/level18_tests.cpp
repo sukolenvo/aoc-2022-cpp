@@ -19,7 +19,8 @@ static const auto sampleInput = R"(2,2,2
 2,1,5
 2,3,5)";
 
-TEST_CASE("level18:solve", "[level18]") {
+TEST_CASE("level18:solve", "[level18]")
+{
   REQUIRE(level18::part1(sampleInput) == 64);
   REQUIRE(level18::part2(sampleInput) == 58);
 }

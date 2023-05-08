@@ -22,7 +22,8 @@ static const auto sampleInput = R"(        ...#
 
 10R5L5R10L4R5L5)";
 
-auto oppositeDirection(const auto &direction) {
+auto oppositeDirection(const auto &direction)
+{
   return static_cast<level22::Direction>((static_cast<int>(direction) + 2) % 4);
 }
 
@@ -32,39 +33,27 @@ TEST_CASE("level22:part2handleOOBsample", "[level22]")
   level22::Direction startDirection{};
   int startX{};
   int startY{};
-  SECTION("UP") {
+  SECTION("UP")
+  {
     startDirection = level22::Direction::up;
-    std::tie(startX, startY) = GENERATE(
-      std::make_tuple(0, 4),
-      std::make_tuple(4, 4),
-      std::make_tuple(8, 0),
-      std::make_tuple(12, 8)
-      );
+    std::tie(startX, startY) =
+      GENERATE(std::make_tuple(0, 4), std::make_tuple(4, 4), std::make_tuple(8, 0), std::make_tuple(12, 8));
   }
-  SECTION("DOWN") {
+  SECTION("DOWN")
+  {
     startDirection = level22::Direction::down;
-    std::tie(startX, startY) = GENERATE(
-      std::make_tuple(0, 7),
-      std::make_tuple(4, 7),
-      std::make_tuple(8, 11),
-      std::make_tuple(12, 11)
-    );
+    std::tie(startX, startY) =
+      GENERATE(std::make_tuple(0, 7), std::make_tuple(4, 7), std::make_tuple(8, 11), std::make_tuple(12, 11));
   }
-  SECTION("RIGHT") {
+  SECTION("RIGHT")
+  {
     startDirection = level22::Direction::right;
-    std::tie(startX, startY) = GENERATE(
-      std::make_tuple(11, 0),
-      std::make_tuple(11, 4),
-      std::make_tuple(15, 8)
-    );
+    std::tie(startX, startY) = GENERATE(std::make_tuple(11, 0), std::make_tuple(11, 4), std::make_tuple(15, 8));
   }
-  SECTION("LEFT") {
+  SECTION("LEFT")
+  {
     startDirection = level22::Direction::left;
-    std::tie(startX, startY) = GENERATE(
-      std::make_tuple(8, 0),
-      std::make_tuple(0, 4),
-      std::make_tuple(8, 8)
-    );
+    std::tie(startX, startY) = GENERATE(std::make_tuple(8, 0), std::make_tuple(0, 4), std::make_tuple(8, 8));
   }
   CAPTURE(startDirection, startX, startY);
   auto tmpDirection = startDirection;
@@ -86,39 +75,27 @@ TEST_CASE("level22:part2handleOOBtask", "[level22]")
   level22::Direction startDirection{};
   int startX{};
   int startY{};
-  SECTION("UP") {
+  SECTION("UP")
+  {
     startDirection = level22::Direction::up;
-    std::tie(startX, startY) = GENERATE(
-      std::make_tuple(0, 8),
-      std::make_tuple(4, 0),
-      std::make_tuple(8, 0)
-    );
+    std::tie(startX, startY) = GENERATE(std::make_tuple(0, 8), std::make_tuple(4, 0), std::make_tuple(8, 0));
   }
-  SECTION("DOWN") {
+  SECTION("DOWN")
+  {
     startDirection = level22::Direction::down;
-    std::tie(startX, startY) = GENERATE(
-      std::make_tuple(0, 15),
-      std::make_tuple(4, 11),
-      std::make_tuple(8, 3)
-    );
+    std::tie(startX, startY) = GENERATE(std::make_tuple(0, 15), std::make_tuple(4, 11), std::make_tuple(8, 3));
   }
-  SECTION("RIGHT") {
+  SECTION("RIGHT")
+  {
     startDirection = level22::Direction::right;
-    std::tie(startX, startY) = GENERATE(
-      std::make_tuple(11, 0),
-      std::make_tuple(7, 4),
-      std::make_tuple(7, 8),
-      std::make_tuple(3, 12)
-    );
+    std::tie(startX, startY) =
+      GENERATE(std::make_tuple(11, 0), std::make_tuple(7, 4), std::make_tuple(7, 8), std::make_tuple(3, 12));
   }
-  SECTION("LEFT") {
+  SECTION("LEFT")
+  {
     startDirection = level22::Direction::left;
-    std::tie(startX, startY) = GENERATE(
-      std::make_tuple(4, 0),
-      std::make_tuple(4, 4),
-      std::make_tuple(0, 8),
-      std::make_tuple(0, 12)
-    );
+    std::tie(startX, startY) =
+      GENERATE(std::make_tuple(4, 0), std::make_tuple(4, 4), std::make_tuple(0, 8), std::make_tuple(0, 12));
   }
   CAPTURE(startDirection, startX, startY);
   auto tmpDirection = startDirection;
@@ -134,14 +111,16 @@ TEST_CASE("level22:part2handleOOBtask", "[level22]")
   REQUIRE(tmpPosition.second == startY);
 }
 
-TEST_CASE("level22:turn", "[level22]") {
+TEST_CASE("level22:turn", "[level22]")
+{
   REQUIRE(level22::turn(level22::Direction::up, 'L') == level22::Direction::left);
   REQUIRE(level22::turn(level22::Direction::up, 'R') == level22::Direction::right);
   REQUIRE(level22::turn(level22::Direction::right, 'L') == level22::Direction::up);
   REQUIRE(level22::turn(level22::Direction::right, 'R') == level22::Direction::down);
 }
 
-TEST_CASE("level22:solve", "[level22]") {
+TEST_CASE("level22:solve", "[level22]")
+{
   REQUIRE(level22::part1(sampleInput) == 6032);
   REQUIRE(level22::part2(sampleInput) == 5031);
 }

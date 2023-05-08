@@ -17,16 +17,17 @@
 
 namespace level23 {
 
-struct Elf {
+struct Elf
+{
   size_t id;
   int x;
   int y;
-  Elf(size_t id_, int x_, int y_): id(id_), x(x_), y(y_) {
-
-  }
+  Elf(size_t id_, int x_, int y_) : id(id_), x(x_), y(y_)
+  {}
 };
 
-auto moveElves(const auto &input, size_t rounds) {
+auto moveElves(const auto &input, size_t rounds)
+{
   const auto lines = splitLines(input);
   std::vector<Elf> elves;
   for (size_t i = 0; i < lines.size(); ++i) {
@@ -37,9 +38,7 @@ auto moveElves(const auto &input, size_t rounds) {
     }
   }
   const auto isOccupied = [&](int x, int y) {
-    return std::any_of(elves.begin(), elves.end(), [&](const auto &elf) {
-      return elf.x == x && elf.y == y;
-    });
+    return std::any_of(elves.begin(), elves.end(), [&](const auto &elf) { return elf.x == x && elf.y == y; });
   };
   const auto hasNorthNeighbour = [&](int x, int y) {
     return isOccupied(x, y - 1) || isOccupied(x - 1, y - 1) || isOccupied(x + 1, y - 1);
@@ -56,12 +55,12 @@ auto moveElves(const auto &input, size_t rounds) {
   const auto hasNeighbour = [&](int x, int y) {
     return hasNorthNeighbour(x, y) || hasSouthNeighbour(x, y) || hasWestNeighbour(x, y) || hasEastNeighbour(x, y);
   };
-  const std::array<std::function<bool(int, int)>, 4> neighbourChecks = { hasNorthNeighbour, hasSouthNeighbour, hasWestNeighbour, hasEastNeighbour };
-  const std::array<std::array<int, 2>, 4> proposedMove { { { 0, -1 }, { 0, 1 }, { -1, 0 }, { 1, 0 } } };
+  const std::array<std::function<bool(int, int)>, 4> neighbourChecks = {
+    hasNorthNeighbour, hasSouthNeighbour, hasWestNeighbour, hasEastNeighbour
+  };
+  const std::array<std::array<int, 2>, 4> proposedMove{ { { 0, -1 }, { 0, 1 }, { -1, 0 }, { 1, 0 } } };
   for (size_t r = 0; r < rounds; ++r) {
-    static const auto hashFunction = [](const std::pair<int, int> &key) {
-      return std::hash<int>()(key.first);
-    };
+    static const auto hashFunction = [](const std::pair<int, int> &key) { return std::hash<int>()(key.first); };
     std::unordered_map<std::pair<int, int>, std::vector<size_t>, decltype(hashFunction)> proposedPositions;
     for (const auto &elf : elves) {
       if (!hasNeighbour(elf.x, elf.y)) {
@@ -72,17 +71,15 @@ auto moveElves(const auto &input, size_t rounds) {
         if (!neighbourChecks[normalisedStep](elf.x, elf.y)) {
           auto newX = elf.x + proposedMove[normalisedStep][0];
           auto newY = elf.y + proposedMove[normalisedStep][1];
-          proposedPositions[{newX, newY}].push_back(elf.id);
+          proposedPositions[{ newX, newY }].push_back(elf.id);
           break;
         }
       }
     }
-    for (const auto&[position, ids] : proposedPositions) {
+    for (const auto &[position, ids] : proposedPositions) {
       if (ids.size() == 1) {
         const auto id = ids[0];
-        auto element = std::find_if(elves.begin(), elves.end(), [&](const auto &elf) {
-          return elf.id == id;
-        });
+        auto element = std::find_if(elves.begin(), elves.end(), [&](const auto &elf) { return elf.id == id; });
         element->x = position.first;
         element->y = position.second;
       }
@@ -91,7 +88,8 @@ auto moveElves(const auto &input, size_t rounds) {
   return elves;
 }
 
-auto part1(const auto &input) {
+auto part1(const auto &input)
+{
   const auto elves = moveElves(input, 10);
   const auto minX = std::min_element(elves.begin(), elves.end(), [](const auto &left, const auto &right) {
     return left.x < right.x;
@@ -108,11 +106,13 @@ auto part1(const auto &input) {
   return (maxX - minX + 1) * (maxY - minY + 1) - static_cast<int>(elves.size());
 }
 
-auto part2(const auto &input) {
+auto part2(const auto &input)
+{
   const auto lines = splitLines(input);
   static const auto padding = 1000;
   std::vector<std::pair<int, int>> elves;
-  std::vector<std::vector<size_t>> map{lines.size() + padding * 2, std::vector<size_t>(lines[0].size() + padding * 2)};
+  std::vector<std::vector<size_t>> map{ lines.size() + padding * 2,
+    std::vector<size_t>(lines[0].size() + padding * 2) };
   for (size_t i = 0; i < lines.size(); ++i) {
     for (size_t j = 0; j < lines[0].size(); ++j) {
       if (lines[i][j] == '#') {
@@ -121,9 +121,7 @@ auto part2(const auto &input) {
       }
     }
   }
-  const auto isOccupied = [&](int x, int y) {
-    return map[static_cast<size_t>(y)][static_cast<size_t>(x)] > 0;
-  };
+  const auto isOccupied = [&](int x, int y) { return map[static_cast<size_t>(y)][static_cast<size_t>(x)] > 0; };
   const auto hasNorthNeighbour = [&](int x, int y) {
     return isOccupied(x, y - 1) || isOccupied(x - 1, y - 1) || isOccupied(x + 1, y - 1);
   };
@@ -139,15 +137,15 @@ auto part2(const auto &input) {
   const auto hasNeighbour = [&](int x, int y) {
     return hasNorthNeighbour(x, y) || hasSouthNeighbour(x, y) || hasWestNeighbour(x, y) || hasEastNeighbour(x, y);
   };
-  const std::array<std::function<bool(int, int)>, 4> neighbourChecks = { hasNorthNeighbour, hasSouthNeighbour, hasWestNeighbour, hasEastNeighbour };
-  const std::array<std::array<int, 2>, 4> proposedMove { { { 0, -1 }, { 0, 1 }, { -1, 0 }, { 1, 0 } } };
-  for (size_t r = 0; ; ++r) {
-    static const auto hashFunction = [](const std::pair<int, int> &key) {
-      return std::hash<int>()(key.first);
-    };
+  const std::array<std::function<bool(int, int)>, 4> neighbourChecks = {
+    hasNorthNeighbour, hasSouthNeighbour, hasWestNeighbour, hasEastNeighbour
+  };
+  const std::array<std::array<int, 2>, 4> proposedMove{ { { 0, -1 }, { 0, 1 }, { -1, 0 }, { 1, 0 } } };
+  for (size_t r = 0;; ++r) {
+    static const auto hashFunction = [](const std::pair<int, int> &key) { return std::hash<int>()(key.first); };
     std::unordered_map<std::pair<int, int>, std::vector<size_t>, decltype(hashFunction)> proposedMoves;
     for (size_t e = 0; e < elves.size(); ++e) {
-      const auto[x, y] = elves[e];
+      const auto [x, y] = elves[e];
       if (!hasNeighbour(x, y)) {
         continue;
       }
@@ -164,7 +162,7 @@ auto part2(const auto &input) {
     if (proposedMoves.size() == 0) {
       return r + 1;
     }
-    for (const auto&[to, ids] : proposedMoves) {
+    for (const auto &[to, ids] : proposedMoves) {
       if (ids.size() == 1) {
         auto &elf = elves[ids[0] - 1];
         map[static_cast<size_t>(elf.second)][static_cast<size_t>(elf.first)] = 0;
@@ -176,11 +174,12 @@ auto part2(const auto &input) {
   }
 }
 
-void run() {
+void run()
+{
   const auto taskInput = readTaskInput(23);
-//  std::cout << part1(taskInput) << '\n';
+  //  std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }
-}
+} // namespace level23
 
-#endif// AOC_2022_CPP_LEVEL23_HPP
+#endif // AOC_2022_CPP_LEVEL23_HPP

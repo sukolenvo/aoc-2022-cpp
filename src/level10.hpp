@@ -5,17 +5,17 @@
 #ifndef AOC_2022_CPP_LEVEL10_HPP
 #define AOC_2022_CPP_LEVEL10_HPP
 
-#include <iostream>
 #include <exception>
-#include <vector>
+#include <iostream>
 #include <utility>
+#include <vector>
 
 #include "common.hpp"
 
-namespace level10
-{
+namespace level10 {
 
-auto part1(const auto &input) {
+auto part1(const auto &input)
+{
   auto lines = splitLines(input);
   int cycle = 1;
   int regX = 1;
@@ -41,7 +41,8 @@ auto part1(const auto &input) {
   return result;
 }
 
-auto part2(const auto &input) {
+auto part2(const auto &input)
+{
   auto lines = splitLines(input);
   auto regX = 1;
   auto cycle = 0;
@@ -66,7 +67,8 @@ auto part2(const auto &input) {
   return result;
 }
 
-void run() {
+void run()
+{
   const auto taskInput = readTaskInput(10);
   std::cout << part1(taskInput) << '\n';
   const auto result2 = part2(taskInput);
@@ -76,8 +78,7 @@ void run() {
     }
     std::cout << (result2.at(i) ? '#' : '.');
   }
-
 }
-}
+} // namespace level10
 
-#endif// AOC_2022_CPP_LEVEL10_HPP
+#endif // AOC_2022_CPP_LEVEL10_HPP

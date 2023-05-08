@@ -17,7 +17,7 @@ inline std::vector<std::string_view> splitLines(const std::string_view &input)
 {
   std::vector<std::string_view> lines;
   size_t start = 0;
-  while(start < input.size()) {
+  while (start < input.size()) {
     auto sepratorIndex = input.find('\n', start);
     if (sepratorIndex == std::string_view::npos) {
       if (start < input.size()) {
@@ -71,4 +71,4 @@ inline auto readTaskInput(auto level)
   return readFile(filename.data());
 }
 
-#endif// AOC_2022_CPP_COMMON_HPP
+#endif // AOC_2022_CPP_COMMON_HPP

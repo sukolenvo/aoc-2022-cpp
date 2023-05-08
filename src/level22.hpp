@@ -59,7 +59,8 @@ auto turn(auto direction, auto side)
   return static_cast<Direction>((static_cast<int>(direction) + 1) % 4);
 }
 
-auto isOOB(const auto &nextPosition, const auto &lines) {
+auto isOOB(const auto &nextPosition, const auto &lines)
+{
   if (nextPosition.first < 0) {
     return true;
   }
@@ -86,7 +87,8 @@ auto walk(const auto &input, const auto &handleOutOfBounds)
   }
   auto instructions = lines.back();
   lines.erase(lines.end() - 2, lines.end());
-  auto x = static_cast<int>(std::distance(lines.front().begin(), std::find(lines.front().begin(), lines.front().end(), '.')));
+  auto x =
+    static_cast<int>(std::distance(lines.front().begin(), std::find(lines.front().begin(), lines.front().end(), '.')));
   int y = 0;
   auto direction = Direction::right;
   auto instruction = instructions.begin();
@@ -335,6 +337,6 @@ void run()
   std::cout << part1(taskInput) << '\n';
   std::cout << part2(taskInput) << '\n';
 }
-}// namespace level22
+} // namespace level22
 
-#endif// AOC_2022_CPP_LEVEL22_HPP
+#endif // AOC_2022_CPP_LEVEL22_HPP

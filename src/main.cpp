@@ -1,17 +1,9 @@
-#include <iostream>
 #include <functional>
+#include <iostream>
 #include <span>
 #include <string>
 
 #include "level1.hpp"
-#include "level2.hpp"
-#include "level3.hpp"
-#include "level4.hpp"
-#include "level5.hpp"
-#include "level6.hpp"
-#include "level7.hpp"
-#include "level8.hpp"
-#include "level9.hpp"
 #include "level10.hpp"
 #include "level11.hpp"
 #include "level12.hpp"
@@ -22,14 +14,24 @@
 #include "level17.hpp"
 #include "level18.hpp"
 #include "level19.hpp"
+#include "level2.hpp"
 #include "level20.hpp"
 #include "level21.hpp"
 #include "level22.hpp"
 #include "level23.hpp"
 #include "level24.hpp"
 #include "level25.hpp"
+#include "level3.hpp"
+#include "level4.hpp"
+#include "level5.hpp"
+#include "level6.hpp"
+#include "level7.hpp"
+#include "level8.hpp"
+#include "level9.hpp"
 
-int main(int argc, const char **argv) // NOLINT(bugprone-exception-escape) check is unreliable on Windows, see: https://stackoverflow.com/questions/61014184/clang-tidys-bugprone-exception-escape-behaves-weirdly-with-msvc-stl
+// exception escape check is unreliable on Windows, see
+// https://stackoverflow.com/questions/61014184/clang-tidys-bugprone-exception-escape-behaves-weirdly-with-msvc-stl
+int main(int argc, const char **argv) // NOLINT(bugprone-exception-escape)
 {
   try {
     const std::array levels{

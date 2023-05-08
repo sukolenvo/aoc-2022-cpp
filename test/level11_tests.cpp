@@ -41,7 +41,7 @@ TEST_CASE("level11:parseInput", "[level11]")
   REQUIRE(result.at(0).getTestDivide() == 23);
   REQUIRE(result.at(0).getSuccessMonkey() == 2);
   REQUIRE(result.at(0).getFailedMonkey() == 3);
-  REQUIRE(result.at(0).getItems() == std::vector<size_t>{79, 98});
+  REQUIRE(result.at(0).getItems() == std::vector<size_t>{ 79, 98 });
 }
 
 TEST_CASE("level11:solve", "[level11]")

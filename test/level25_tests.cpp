@@ -19,7 +19,8 @@ static const auto sampleInput = R"(1=-0-2
 1=
 122)";
 
-TEST_CASE("level25:solve", "[level25]") {
+TEST_CASE("level25:solve", "[level25]")
+{
   REQUIRE(level25::fromSnafu(std::string("1=11-2")) == 2022);
   REQUIRE(level25::part1(sampleInput) == "2=-1=0");
 }
